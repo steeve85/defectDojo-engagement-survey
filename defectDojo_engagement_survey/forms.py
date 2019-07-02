@@ -82,7 +82,7 @@ class TextQuestionForm(QuestionForm):
 
         if not answer:
             if self.fields['answer'].required:
-                raise forms.ValidationError, 'Required'
+                raise forms.ValidationError('Required')
             return
 
         text_answer, created = TextAnswer.objects.get_or_create(
@@ -159,7 +159,7 @@ class ChoiceQuestionForm(QuestionForm):
 
         if not real_answer:
             if self.fields['answer'].required:
-                raise forms.ValidationError, 'Required'
+                raise forms.ValidationError('Required')
             return
 
         choices = Choice.objects.filter(id__in=real_answer)

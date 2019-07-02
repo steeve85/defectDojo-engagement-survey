@@ -8,8 +8,8 @@ from django.contrib import admin
 from polymorphic.admin import PolymorphicParentModelAdmin, \
     PolymorphicChildModelAdmin
 
-from models import Question, TextQuestion, ChoiceQuestion, Choice
-from models import Answer, TextAnswer, ChoiceAnswer, Engagement_Survey, \
+from .models import Question, TextQuestion, ChoiceQuestion, Choice
+from .models import Answer, TextAnswer, ChoiceAnswer, Engagement_Survey, \
     Answered_Survey
 
 

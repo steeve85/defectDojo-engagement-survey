@@ -42,7 +42,7 @@ class TextQuestion(Question):
         '''
         Returns the form for this model
         '''
-        from forms import TextQuestionForm
+        from .forms import TextQuestionForm
         return TextQuestionForm
 
 
@@ -78,7 +78,7 @@ class ChoiceQuestion(Question):
         Returns the form for this model
         '''
 
-        from forms import ChoiceQuestionForm
+        from .forms import ChoiceQuestionForm
         return ChoiceQuestionForm
 
 
@@ -111,7 +111,7 @@ class ChoiceAnswer(Answer):
 
     def __unicode__(self):
         if len(self.answer.all()):
-            return unicode(self.answer.all()[0])
+            return str(self.answer.all()[0])
         else:
             return 'No Response'
 
