@@ -92,7 +92,8 @@ class Answer(PolymorphicModel, TimeStampedModel):
 #     content_object = generic.GenericForeignKey('content_type', 'object_id')
     answered_survey = models.ForeignKey('Answered_Survey',
                                         null=False,
-                                        blank=False)
+                                        blank=False,
+                                        on_delete=models.CASCADE)
 
 
 class TextAnswer(Answer):
@@ -137,13 +138,14 @@ class Engagement_Survey(models.Model):
 class Answered_Survey(models.Model):
     # tie this to a specific engagement
     engagement = models.ForeignKey(Engagement, related_name='engagement',
-                                   null=True, blank=False, editable=True)
+                                   null=True, blank=False, editable=True,
+                                   on_delete=models.CASCADE)
     # what surveys have been answered
-    survey = models.ForeignKey(Engagement_Survey)
+    survey = models.ForeignKey(Engagement_Survey, on_delete=models.CASCADE)
     # who answered it
     responder = models.ForeignKey(User, related_name='responder',
                                   null=True, blank=True, editable=True,
-                                  default=None)
+                                  default=None, on_delete=models.CASCADE)
     completed = models.BooleanField(default=False)
     answered_on = models.DateField(null=True)
 
