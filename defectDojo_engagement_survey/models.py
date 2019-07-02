@@ -85,7 +85,7 @@ class ChoiceQuestion(Question):
 class Answer(PolymorphicModel, TimeStampedModel):
     ''' Base Answer model
     '''
-    question = models.ForeignKey(Question)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
 #     content_type = models.ForeignKey(ContentType)
 #     object_id = models.PositiveIntegerField()
