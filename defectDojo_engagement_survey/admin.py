@@ -40,11 +40,13 @@ class QuestionParentAdmin(PolymorphicParentModelAdmin):
 
     base_model = Question
     child_models = (
-        (TextQuestion, TextQuestionAdmin),
-        (ChoiceQuestion, ChoiceQuestionAdmin),
+        TextQuestion,
+        ChoiceQuestion
     )
 
 
+admin.site.register(TextQuestion, TextQuestionAdmin)
+admin.site.register(ChoiceQuestion, ChoiceQuestionAdmin)
 admin.site.register(Question, QuestionParentAdmin)
 admin.site.register(Choice)
 
