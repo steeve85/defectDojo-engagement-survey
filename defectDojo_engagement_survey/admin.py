@@ -83,10 +83,13 @@ class AnswerParentAdmin(PolymorphicParentModelAdmin):
 
     base_model = Answer
     child_models = (
-        (TextAnswer, TextAnswerAdmin),
-        (ChoiceAnswer, ChoiceAnswerAdmin),
+        TextAnswer,
+        ChoiceAnswer,
     )
+    
 
+admin.site.register(TextAnswer, TextAnswerAdmin)
+admin.site.register(ChoiceAnswer, ChoiceAnswerAdmin)
 admin.site.register(Answer, AnswerParentAdmin)
 admin.site.register(Engagement_Survey)
 admin.site.register(Answered_Survey)
