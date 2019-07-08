@@ -9,6 +9,7 @@ class SurveyFilter(FilterSet):
     name = CharFilter(lookup_type='icontains')
     description = CharFilter(lookup_type='icontains')
     active = BooleanFilter()
+    survey_set = FilterSet
 
     class Meta:
         model = Engagement_Survey
@@ -51,6 +52,7 @@ class QuestionTypeFilter(ChoiceFilter):
 class QuestionFilter(FilterSet):
     text = CharFilter(lookup_type='icontains')
     type = QuestionTypeFilter()
+    question_set = FilterSet
 
     class Meta:
         model = Question
