@@ -25,6 +25,8 @@ from .forms import Add_Survey_Form, Delete_Survey_Form, CreateSurveyForm, Delete
     CreateChoiceQuestionForm, EditTextQuestionForm, EditChoiceQuestionForm, AddChoicesForm
 from .models import Answered_Survey, Engagement_Survey, Answer, TextQuestion, ChoiceQuestion, Choice
 
+import sys
+
 localtz = timezone('America/Chicago')
 
 
@@ -346,6 +348,7 @@ def survey(request):
     user = request.user
     surveys = Engagement_Survey.objects.all()
     surveys = SurveyFilter(request.GET, queryset=surveys)
+
     paged_surveys = get_page_items(request, surveys.survey_set, 25)
     add_breadcrumb(title="All Surveys", top_level=True, request=request)
     return render(request, 'defectDojo-engagement-survey/list_surveys.html',
