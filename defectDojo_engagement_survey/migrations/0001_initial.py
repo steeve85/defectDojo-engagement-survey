@@ -31,6 +31,36 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
+            name='Answer',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('created', django_extensions.db.fields.CreationDateTimeField(auto_now_add=True, verbose_name='created')),
+                ('modified', django_extensions.db.fields.ModificationDateTimeField(auto_now=True, verbose_name='modified')),
+                ('answered_survey', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Answered_Survey')),
+                ('polymorphic_ctype', models.ForeignKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='polymorphic_defectdojo_engagement_survey.answer_set+', to='contenttypes.ContentType')),
+                ('question', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Question')),
+            ],
+            options={
+                'abstract': False,
+                'base_manager_name': 'objects',
+            },
+        ),
+        migrations.CreateModel(
+            name='Question',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('created', django_extensions.db.fields.CreationDateTimeField(auto_now_add=True, verbose_name='created')),
+                ('modified', django_extensions.db.fields.ModificationDateTimeField(auto_now=True, verbose_name='modified')),
+                ('order', models.PositiveIntegerField(default=1, help_text='The render order')),
+                ('optional', models.BooleanField(default=False, help_text="If selected, user doesn't have to answer this question")),
+                ('text', models.TextField(help_text='The question text')),
+                ('polymorphic_ctype', models.ForeignKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='polymorphic_defectdojo_engagement_survey.question_set+', to='contenttypes.ContentType')),
+            ],
+            options={
+                'ordering': ['order'],
+            },
+        ),
+        migrations.CreateModel(
             name='TextAnswer',
             fields=[
                 ('answer_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer')),
@@ -52,21 +82,6 @@ class Migration(migrations.Migration):
                 'base_manager_name': 'objects',
             },
             bases=('defectDojo_engagement_survey.question',),
-        ),
-        migrations.CreateModel(
-            name='Question',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', django_extensions.db.fields.CreationDateTimeField(auto_now_add=True, verbose_name='created')),
-                ('modified', django_extensions.db.fields.ModificationDateTimeField(auto_now=True, verbose_name='modified')),
-                ('order', models.PositiveIntegerField(default=1, help_text='The render order')),
-                ('optional', models.BooleanField(default=False, help_text="If selected, user doesn't have to answer this question")),
-                ('text', models.TextField(help_text='The question text')),
-                ('polymorphic_ctype', models.ForeignKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='polymorphic_defectdojo_engagement_survey.question_set+', to='contenttypes.ContentType')),
-            ],
-            options={
-                'ordering': ['order'],
-            },
         ),
         migrations.CreateModel(
             name='Engagement_Survey',
@@ -96,21 +111,6 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Answered Engagement Survey',
                 'verbose_name_plural': 'Answered Engagement Surveys',
-            },
-        ),
-        migrations.CreateModel(
-            name='Answer',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', django_extensions.db.fields.CreationDateTimeField(auto_now_add=True, verbose_name='created')),
-                ('modified', django_extensions.db.fields.ModificationDateTimeField(auto_now=True, verbose_name='modified')),
-                ('answered_survey', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Answered_Survey')),
-                ('polymorphic_ctype', models.ForeignKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='polymorphic_defectdojo_engagement_survey.answer_set+', to='contenttypes.ContentType')),
-                ('question', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Question')),
-            ],
-            options={
-                'abstract': False,
-                'base_manager_name': 'objects',
             },
         ),
         migrations.CreateModel(
