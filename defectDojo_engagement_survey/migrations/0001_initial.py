@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         ('dojo', '0009_endpoint_remediation'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('contenttypes', '0002_remove_content_type_name'),
-        ('defectDojo_engagement_survey', '__first__'),
+        ('defectDojo_engagement_survey', '__latest__'),
     ]
 
     operations = [
