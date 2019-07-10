@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('dojo', '0009_endpoint_remediation'),
-        ('auth', '0008_alter_user_username_max_length'),
+        ('defectDojo_engagement_survey', '__first__'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('contenttypes', '0002_remove_content_type_name'),
     ]
