@@ -82,6 +82,36 @@ class Migration(migrations.Migration):
             bases=('defectDojo_engagement_survey.question',),
         ),
         migrations.CreateModel(
+            name='ChoiceQuestion',
+            fields=[
+                ('question_ptr',
+                 models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True,
+                                      primary_key=True, serialize=False, to='defectDojo_engagement_survey.Question')),
+                ('multichoice', models.BooleanField(default=False, help_text='Select one or more')),
+                ('choices', models.ManyToManyField(to='defectDojo_engagement_survey.Choice')),
+            ],
+            options={
+                'abstract': False,
+                'base_manager_name': 'objects',
+            },
+            bases=('defectDojo_engagement_survey.question',),
+        ),
+        migrations.CreateModel(
+            name='ChoiceAnswer',
+            fields=[
+                ('answer_ptr',
+                 models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True,
+                                      primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer')),
+                ('answer', models.ManyToManyField(help_text='The selected choices as the answer',
+                                                  to='defectDojo_engagement_survey.Choice')),
+            ],
+            options={
+                'abstract': False,
+                'base_manager_name': 'objects',
+            },
+            bases=('defectDojo_engagement_survey.answer',),
+        ),
+        migrations.CreateModel(
             name='Engagement_Survey',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -110,30 +140,5 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Answered Engagement Survey',
                 'verbose_name_plural': 'Answered Engagement Surveys',
             },
-        ),
-        migrations.CreateModel(
-            name='ChoiceQuestion',
-            fields=[
-                ('question_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Question')),
-                ('multichoice', models.BooleanField(default=False, help_text='Select one or more')),
-                ('choices', models.ManyToManyField(to='defectDojo_engagement_survey.Choice')),
-            ],
-            options={
-                'abstract': False,
-                'base_manager_name': 'objects',
-            },
-            bases=('defectDojo_engagement_survey.question',),
-        ),
-        migrations.CreateModel(
-            name='ChoiceAnswer',
-            fields=[
-                ('answer_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer')),
-                ('answer', models.ManyToManyField(help_text='The selected choices as the answer', to='defectDojo_engagement_survey.Choice')),
-            ],
-            options={
-                'abstract': False,
-                'base_manager_name': 'objects',
-            },
-            bases=('defectDojo_engagement_survey.answer',),
         ),
     ]
