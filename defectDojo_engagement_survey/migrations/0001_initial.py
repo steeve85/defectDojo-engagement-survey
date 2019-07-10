@@ -102,7 +102,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('completed', models.BooleanField(default=False)),
                 ('answered_on', models.DateField(null=True)),
-                ('engagement', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='Cred_Mapping.engagement+', to='dojo.Engagement')),
+                ('engagement', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='Cred_Mapping.engagement', to='dojo.Engagement')),
                 ('responder', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='responder', to=settings.AUTH_USER_MODEL)),
                 ('survey', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Engagement_Survey')),
             ],
