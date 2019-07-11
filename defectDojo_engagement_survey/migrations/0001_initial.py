@@ -30,8 +30,7 @@ class Migration(migrations.Migration):
                 'ordering': ['order'],
             },
         ),
-        ]
-    '''
+
         migrations.CreateModel(
             name='Question',
             fields=[
@@ -143,6 +142,7 @@ class Migration(migrations.Migration):
                 'ordering': ('-active', 'name'),
             },
         ),
+        '''
         migrations.CreateModel(
             name='Answered_Survey',
             fields=[
@@ -158,5 +158,5 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'Answered Engagement Surveys',
             },
         ),
-    
-    ]'''
+        '''
+    ]

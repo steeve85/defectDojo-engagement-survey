@@ -135,6 +135,7 @@ class Engagement_Survey(models.Model):
 
 
 # meant to be an answered survey tied to an engagement
+'''
 class Answered_Survey(models.Model):
     # tie this to a specific engagement
     engagement = models.ForeignKey(Engagement, related_name='Cred_Mapping.engagement+',
@@ -155,7 +156,7 @@ class Answered_Survey(models.Model):
 
     def __unicode__(self):
         return self.survey.name
-
+'''
 
 auditlog.register(Answer)
 auditlog.register(Answered_Survey)
