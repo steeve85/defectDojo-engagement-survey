@@ -159,6 +159,6 @@ class Answered_Survey(models.Model):
 '''
 
 auditlog.register(Answer)
-auditlog.register(Answered_Survey)
+#auditlog.register(Answered_Survey)
 auditlog.register(Question)
 auditlog.register(Engagement_Survey)
