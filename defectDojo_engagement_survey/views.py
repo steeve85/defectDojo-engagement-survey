@@ -360,7 +360,7 @@ def questions(request):
     user = request.user
     questions = Question.objects.all()
     questions = QuestionFilter(request.GET, queryset=questions)
-    paged_questions = get_page_items(request, questions.question_set, 25)
+    paged_questions = get_page_items(request, questions.question_set.qs, 25)
     add_breadcrumb(title="All Questions", top_level=False, request=request)
     return render(request, 'defectDojo-engagement-survey/list_questions.html',
                   {"questions": paged_questions,
