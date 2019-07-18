@@ -148,7 +148,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='engagement_survey',
             name='questions',
-            field=mmodels.ManyToManyField(to='defectDojo_engagement_survey.Question'),
+            field=models.ManyToManyField(to='defectDojo_engagement_survey.Question'),
         ),
         migrations.AddField(
             model_name='answered_survey',
