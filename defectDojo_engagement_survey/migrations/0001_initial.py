@@ -105,7 +105,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'base_manager_name': 'objects',
             },
-            bases=('defectDojo_engagement_survey.answered_survey',),
         ),
         migrations.CreateModel(
             name='TextAnswer',
