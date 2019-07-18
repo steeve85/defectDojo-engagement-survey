@@ -47,11 +47,11 @@ class QuestionTypeFilter(ChoiceFilter):
             value = int(value)
         except (ValueError, TypeError):
             value = ''
-        return self.options[value][1](self, qs, self.name)
+        return self.options[value][1](self, qs, 'no_name')#self.name)
 
 
 class QuestionFilter(FilterSet):
-    text = CharFilter(field_name='text', lookup_expr='icontains')
+    text = CharFilter(lookup_expr='icontains')
     type = QuestionTypeFilter()
 
     class Meta:
