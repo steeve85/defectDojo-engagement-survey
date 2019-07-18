@@ -346,7 +346,7 @@ def survey(request):
     user = request.user
     surveys = Engagement_Survey.objects.all()
     surveys = SurveyFilter(request.GET, queryset=surveys)
-    paged_surveys = get_page_items(request, surveys.qa, 25)
+    paged_surveys = get_page_items(request, surveys.qs, 25)
     add_breadcrumb(title="All Surveys", top_level=True, request=request)
     return render(request, 'defectDojo-engagement-survey/list_surveys.html',
                   {"surveys": paged_surveys,
