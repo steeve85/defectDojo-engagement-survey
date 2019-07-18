@@ -14,7 +14,7 @@ class SurveyFilter(FilterSet):
         model = Engagement_Survey
         exclude = ['questions']
 
-    survey_set=FilterSet
+    survey_set = FilterSet
 
 
 class QuestionTypeFilter(ChoiceFilter):

@@ -82,6 +82,47 @@ class ChoiceQuestion(Question):
         return ChoiceQuestionForm
 
 
+# meant to be a abstract survey, identified by name for purpose
+class Engagement_Survey(models.Model):
+    name = models.CharField(max_length=200, null=False, blank=False,
+                            editable=True)
+    description = models.TextField(editable=True)
+    questions = models.ManyToManyField(Question)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = "Engagement Survey"
+        verbose_name_plural = "Engagement Surveys"
+        ordering = ('-active', 'name',)
+
+    def __unicode__(self):
+        return self.name
+
+
+# meant to be an answered survey tied to an engagement
+
+class Answered_Survey(models.Model):
+    # tie this to a specific engagement
+    engagement = models.ForeignKey(Engagement, related_name='engagement+',
+                                   null=True, blank=False, editable=True,
+                                   on_delete=models.CASCADE)
+    # what surveys have been answered
+    survey = models.ForeignKey(Engagement_Survey, on_delete=models.CASCADE)
+    # who answered it
+    responder = models.ForeignKey(User, related_name='responder',
+                                  null=True, blank=True, editable=True,
+                                  default=None, on_delete=models.CASCADE)
+    completed = models.BooleanField(default=False)
+    answered_on = models.DateField(null=True)
+
+    class Meta:
+        verbose_name = "Answered Engagement Survey"
+        verbose_name_plural = "Answered Engagement Surveys"
+
+    def __unicode__(self):
+        return self.survey.name
+
+
 class Answer(PolymorphicModel, TimeStampedModel):
     ''' Base Answer model
     '''
@@ -90,7 +131,7 @@ class Answer(PolymorphicModel, TimeStampedModel):
 #     content_type = models.ForeignKey(ContentType)
 #     object_id = models.PositiveIntegerField()
 #     content_object = generic.GenericForeignKey('content_type', 'object_id')
-    answered_survey = models.ForeignKey('Answered_Survey',
+    answered_survey = models.ForeignKey(Answered_Survey,
                                         null=False,
                                         blank=False,
                                         on_delete=models.CASCADE)
@@ -116,46 +157,6 @@ class ChoiceAnswer(Answer):
         else:
             return 'No Response'
 
-
-# meant to be a abstract survey, identified by name for purpose
-class Engagement_Survey(models.Model):
-    name = models.CharField(max_length=200, null=False, blank=False,
-                            editable=True)
-    description = models.TextField(editable=True)
-    questions = models.ManyToManyField(Question)
-    active = models.BooleanField(default=True)
-
-    class Meta:
-        verbose_name = "Engagement Survey"
-        verbose_name_plural = "Engagement Surveys"
-        ordering = ('-active', 'name',)
-
-    def __unicode__(self):
-        return self.name
-
-
-# meant to be an answered survey tied to an engagement
-
-class Answered_Survey(models.Model):
-    # tie this to a specific engagement
-    engagement = models.ForeignKey(Engagement, related_name='Cred_Mapping.engagement+',
-                                   null=True, blank=False, editable=True,
-                                   on_delete=models.CASCADE)
-    # what surveys have been answered
-    survey = models.ForeignKey(Engagement_Survey, on_delete=models.CASCADE)
-    # who answered it
-    responder = models.ForeignKey(User, related_name='responder',
-                                  null=True, blank=True, editable=True,
-                                  default=None, on_delete=models.CASCADE)
-    completed = models.BooleanField(default=False)
-    answered_on = models.DateField(null=True)
-
-    class Meta:
-        verbose_name = "Answered Engagement Survey"
-        verbose_name_plural = "Answered Engagement Surveys"
-
-    def __unicode__(self):
-        return self.survey.name
 
 auditlog.register(Answer)
 auditlog.register(Answered_Survey)

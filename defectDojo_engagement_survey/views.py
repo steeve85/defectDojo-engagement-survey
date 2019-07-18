@@ -85,7 +85,7 @@ def answer_survey(request, eid, sid):
                          answered_survey=survey,
                          question=q, form_tag=False)
             for q in survey.survey.questions.all()
-            ]
+                    ]
 
         questions_are_valid = []
 
