@@ -93,7 +93,6 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Answered Engagement Survey',
                 'verbose_name_plural': 'Answered Engagement Surveys',
             },
-            bases=('defectDojo_engagement_survey.engagement_surcey',),
         ),
         migrations.CreateModel(
             name='Answer',
@@ -106,7 +105,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'base_manager_name': 'objects',
             },
-            bases=('defectDojo_engagement_survey.answered_survey',),
         ),
         migrations.CreateModel(
             name='TextAnswer',
@@ -148,7 +146,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='engagement_survey',
             name='questions',
-            field=mmodels.ManyToManyField(to='defectDojo_engagement_survey.Question'),
+            field=models.ManyToManyField(to='defectDojo_engagement_survey.Question'),
         ),
         migrations.AddField(
             model_name='answered_survey',
