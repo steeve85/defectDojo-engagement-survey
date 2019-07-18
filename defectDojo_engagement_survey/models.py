@@ -3,13 +3,15 @@ Created on Feb 16, 2015
 
 @author: jay7958
 '''
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
 from polymorphic.models import PolymorphicModel
 from auditlog.registry import auditlog
 
 from dojo.models import Engagement
+
+User = get_user_model()
 
 
 class Question(PolymorphicModel, TimeStampedModel):
