@@ -133,7 +133,7 @@ class Answer(PolymorphicModel, TimeStampedModel):
 #     content_type = models.ForeignKey(ContentType)
 #     object_id = models.PositiveIntegerField()
 #     content_object = generic.GenericForeignKey('content_type', 'object_id')
-    answered_survey = models.ForeignKey(Answered_Survey,
+    answered_survey = models.ForeignKey('Answered_Survey',
                                         null=False,
                                         blank=False,
                                         on_delete=models.CASCADE)
