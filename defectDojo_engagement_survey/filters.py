@@ -6,8 +6,8 @@ from .models import Engagement_Survey, Question
 
 
 class SurveyFilter(FilterSet):
-    name = CharFilter(lookup_expre='icontains')
-    description = CharFilter(lookup_expre='icontains')
+    name = CharFilter(lookup_expr='icontains')
+    description = CharFilter(lookup_expr='icontains')
     active = BooleanFilter()
 
     class Meta:
@@ -51,7 +51,7 @@ class QuestionTypeFilter(ChoiceFilter):
 
 
 class QuestionFilter(FilterSet):
-    text = CharFilter(lookup_expre='icontains')
+    text = CharFilter(lookup_expr='icontains')
     type = QuestionTypeFilter()
 
     class Meta:
