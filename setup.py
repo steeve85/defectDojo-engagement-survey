@@ -7,6 +7,7 @@ from setuptools import setup, find_packages
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+
 setup(
     name="defectDojo_engagement_survey",
     version="1.0.1",
@@ -34,5 +35,5 @@ setup(
         'django-crispy-forms',
         'django-overextends',
         'django_extensions',
-        ]
+                    ]
 )

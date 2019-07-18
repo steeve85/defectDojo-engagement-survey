@@ -4,12 +4,14 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 import django_extensions.db.fields
+import sys
 
 
 class Migration(migrations.Migration):
 
+    sys.stderr.write("\n\ndefectDojo_engagement_survery 0001_initial")
     initial = True
-
+    sys.stderr.write("\nChecking Dependencies")
     dependencies = [
         ('contenttypes', '0002_remove_content_type_name'),
         ('dojo', '__latest__'),
@@ -26,7 +28,6 @@ class Migration(migrations.Migration):
                 ('order', models.PositiveIntegerField(default=1, help_text='The render order')),
                 ('optional', models.BooleanField(default=False, help_text="If selected, user doesn't have to answer this question")),
                 ('text', models.TextField(help_text='The question text')),
-                ('polymorphic_ctype', models.ForeignKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='polymorphic_defectdojo_engagement_survey.question_set+', to='contenttypes.ContentType')),
             ],
             options={
                 'ordering': ['order'],
@@ -137,5 +138,10 @@ class Migration(migrations.Migration):
                 'base_manager_name': 'objects',
             },
             bases=('defectDojo_engagement_survey.answer',),
+        ),
+        migrations.AddField(
+            model_name='question',
+            name='polymorphic_ctype',
+            field=models.ForeignKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='polymorphic_defectdojo_engagement_survey.question_set+', to='contenttypes.ContentType'),
         ),
     ]
