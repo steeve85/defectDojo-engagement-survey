@@ -60,9 +60,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ChoiceQuestion',
             fields=[
-                ('question_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Question')),
                 ('multichoice', models.BooleanField(default=False, help_text='Select one or more')),
-                ('choices', models.ManyToManyField(to='defectDojo_engagement_survey.Choice')),
             ],
             options={
                 'abstract': False,
@@ -77,7 +75,6 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=200)),
                 ('description', models.TextField()),
                 ('active', models.BooleanField(default=True)),
-                ('questions', models.ManyToManyField(to='defectDojo_engagement_survey.Question')),
             ],
             options={
                 'verbose_name': 'Engagement Survey',
@@ -103,9 +100,6 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created', django_extensions.db.fields.CreationDateTimeField(auto_now_add=True, verbose_name='created')),
                 ('modified', django_extensions.db.fields.ModificationDateTimeField(auto_now=True, verbose_name='modified')),
-                ('answered_survey', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Answered_Survey')),
-                ('polymorphic_ctype', models.ForeignKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='polymorphic_defectdojo_engagement_survey.answer_set+', to='contenttypes.ContentType')),
-                ('question', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Question')),
             ],
             options={
                 'abstract': False,
@@ -115,7 +109,6 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TextAnswer',
             fields=[
-                ('answer_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer')),
                 ('answer', models.TextField(help_text='The answer text')),
             ],
             options={
@@ -127,7 +120,6 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ChoiceAnswer',
             fields=[
-                ('answer_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer')),
                 ('answer', models.ManyToManyField(help_text='The selected choices as the answer', to='defectDojo_engagement_survey.Choice')),
             ],
             options={
@@ -140,6 +132,21 @@ class Migration(migrations.Migration):
             model_name='question',
             name='polymorphic_ctype',
             field=models.ForeignKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='polymorphic_defectdojo_engagement_survey.question_set+', to='contenttypes.ContentType'),
+        ),
+        migrations.AddField(
+            model_name='choicequestion',
+            name='choices',
+            field=models.ManyToManyField(to='defectDojo_engagement_survey.Choice'),
+        ),
+        migrations.AddField(
+            model_name='choicequestion',
+            name='question_ptr',
+            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Question'),
+        ),
+        migrations.AddField(
+            model_name='engagement_survey',
+            name='questions',
+            field=mmodels.ManyToManyField(to='defectDojo_engagement_survey.Question'),
         ),
         migrations.AddField(
             model_name='answered_survey',
@@ -155,5 +162,30 @@ class Migration(migrations.Migration):
             model_name='answered_survey',
             name='survey',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Engagement_Survey'),
+        ),
+        migrations.AddField(
+            model_name='answer',
+            name='answered_survey',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Answered_Survey'),
+        ),
+        migrations.AddField(
+            model_name='answer',
+            name='polymorphic_ctype',
+            field=models.ForeignKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='polymorphic_defectdojo_engagement_survey.answer_set+', to='contenttypes.ContentType'),
+        ),
+        migrations.AddField(
+            model_name='answer',
+            name='question',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Question'),
+        ),
+        migrations.AddField(
+            model_name='textanswer',
+            name='answer_ptr',
+            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer'),
+        ),
+        migrations.AddField(
+            model_name='choiceanswer',
+            name='answer_ptr',
+            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer'),
         ),
     ]
