@@ -51,7 +51,7 @@ class QuestionTypeFilter(ChoiceFilter):
 
 
 class QuestionFilter(FilterSet):
-    text = CharFilter(lookup_expr='icontains')
+    text = CharFilter(field_name='text', lookup_expr='icontains')
     type = QuestionTypeFilter()
 
     class Meta:
