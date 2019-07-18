@@ -4,14 +4,11 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 import django_extensions.db.fields
-import sys
 
 
 class Migration(migrations.Migration):
 
-    sys.stderr.write("\n\ndefectDojo_engagement_survery 0001_initial")
     initial = True
-    sys.stderr.write("\nChecking Dependencies")
     dependencies = [
         ('contenttypes', '0002_remove_content_type_name'),
         ('dojo', '__latest__'),
