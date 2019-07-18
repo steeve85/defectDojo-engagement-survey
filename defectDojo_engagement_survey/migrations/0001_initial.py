@@ -93,7 +93,6 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Answered Engagement Survey',
                 'verbose_name_plural': 'Answered Engagement Surveys',
             },
-            bases=('defectDojo_engagement_survey.engagement_survey',),
         ),
         migrations.CreateModel(
             name='Answer',
