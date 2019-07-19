@@ -57,6 +57,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ChoiceQuestion',
             fields=[
+                ('question_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Question')),
                 ('multichoice', models.BooleanField(default=False, help_text='Select one or more')),
             ],
             options={
@@ -118,6 +119,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ChoiceAnswer',
             fields=[
+                ('answer_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer')),
                 ('answer', models.ManyToManyField(help_text='The selected choices as the answer', to='defectDojo_engagement_survey.Choice')),
             ],
             options={
@@ -136,11 +138,6 @@ class Migration(migrations.Migration):
             name='choices',
             field=models.ManyToManyField(to='defectDojo_engagement_survey.Choice'),
         ),
-        # migrations.AddField(
-        #     model_name='choicequestion',
-        #     name='question_ptr',
-        #     field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Question'),
-        # ),
         migrations.AddField(
             model_name='engagement_survey',
             name='questions',
@@ -176,14 +173,4 @@ class Migration(migrations.Migration):
             name='question',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Question'),
         ),
-        # migrations.AddField(
-        #     model_name='textanswer',
-        #     name='answer_ptr',
-        #     field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer'),
-        # ),
-        # migrations.AddField(
-        #     model_name='choiceanswer',
-        #     name='answer_ptr',
-        #     field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer'),
-        # ),
     ]
