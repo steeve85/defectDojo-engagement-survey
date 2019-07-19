@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('modified', django_extensions.db.fields.ModificationDateTimeField(auto_now=True, verbose_name='modified')),
                 ('order', models.PositiveIntegerField(default=1, help_text='The render order')),
                 ('optional', models.BooleanField(default=False, help_text="If selected, user doesn't have to answer this question")),
-                ('text', models.TextField(help_text='The question text')),
+                ('text', models.TextField(blank=False, help_text='The question text', default='')),
             ],
             options={
                 'ordering': ['order'],
@@ -70,8 +70,8 @@ class Migration(migrations.Migration):
             name='Engagement_Survey',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('description', models.TextField()),
+                ('name', models.CharField(max_length=200, null=False, blank=False, editable=True, default='')),
+                ('description', models.TextField(editable=True, default='')),
                 ('active', models.BooleanField(default=True)),
             ],
             options={
@@ -108,7 +108,7 @@ class Migration(migrations.Migration):
             name='TextAnswer',
             fields=[
                 ('answer_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer')),
-                ('answer', models.TextField(help_text='The answer text')),
+                ('answer', models.TextField(blank=False, help_text='The answer text', default='')),
             ],
             options={
                 'abstract': False,
@@ -146,12 +146,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='answered_survey',
             name='engagement',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='engagement+', to='dojo.Engagement'),
+            field=models.ForeignKey(null=True, blank=False, editable=True, on_delete=django.db.models.deletion.CASCADE, related_name='engagement+', to='dojo.Engagement'),
         ),
         migrations.AddField(
             model_name='answered_survey',
             name='responder',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='responder', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(blank=True, default=None, null=True, editable=True, on_delete=django.db.models.deletion.CASCADE, related_name='responder', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='answered_survey',
@@ -161,7 +161,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='answer',
             name='answered_survey',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Answered_Survey'),
+            field=models.ForeignKey(null=False, blank=False, on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Answered_Survey'),
         ),
         migrations.AddField(
             model_name='answer',

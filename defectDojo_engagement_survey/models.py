@@ -29,7 +29,7 @@ class Question(PolymorphicModel, TimeStampedModel):
         default=False,
         help_text="If selected, user doesn't have to answer this question")
 
-    text = models.TextField(blank=False, help_text='The question text')
+    text = models.TextField(blank=False, help_text='The question text', default='')
 
     def __unicode__(self):
         return self.text
@@ -87,8 +87,8 @@ class ChoiceQuestion(Question):
 # meant to be a abstract survey, identified by name for purpose
 class Engagement_Survey(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False,
-                            editable=True)
-    description = models.TextField(editable=True)
+                            editable=True, default='')
+    description = models.TextField(editable=True, default='')
     questions = models.ManyToManyField(Question)
     active = models.BooleanField(default=True)
 
@@ -133,7 +133,7 @@ class Answer(PolymorphicModel, TimeStampedModel):
 #     content_type = models.ForeignKey(ContentType)
 #     object_id = models.PositiveIntegerField()
 #     content_object = generic.GenericForeignKey('content_type', 'object_id')
-    answered_survey = models.ForeignKey('Answered_Survey',
+    answered_survey = models.ForeignKey(Answered_Survey,
                                         null=False,
                                         blank=False,
                                         on_delete=models.CASCADE)
@@ -142,7 +142,8 @@ class Answer(PolymorphicModel, TimeStampedModel):
 class TextAnswer(Answer):
     answer = models.TextField(
         blank=False,
-        help_text='The answer text')
+        help_text='The answer text',
+        default='')
 
     def __unicode__(self):
         return self.answer
