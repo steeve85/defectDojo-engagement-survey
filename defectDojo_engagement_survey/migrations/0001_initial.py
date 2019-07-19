@@ -106,6 +106,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TextAnswer',
             fields=[
+                ('answer_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer')),
                 ('answer', models.TextField(help_text='The answer text')),
             ],
             options={
@@ -180,9 +181,9 @@ class Migration(migrations.Migration):
         #     name='answer_ptr',
         #     field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer'),
         # ),
-        migrations.AddField(
-            model_name='choiceanswer',
-            name='answer_ptr',
-            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer'),
-        ),
+        # migrations.AddField(
+        #     model_name='choiceanswer',
+        #     name='answer_ptr',
+        #     field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='defectDojo_engagement_survey.Answer'),
+        # ),
     ]
