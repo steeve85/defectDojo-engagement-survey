@@ -163,5 +163,5 @@ class ChoiceAnswer(Answer):
 
 auditlog.register(Answer)
 auditlog.register(Answered_Survey)
-# auditlog.register(Question)
+# auditlog.register(Question) CAUSING ISSUES INSTALLING FIXUTRES.
 auditlog.register(Engagement_Survey)
