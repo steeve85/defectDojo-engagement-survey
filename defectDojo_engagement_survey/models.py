@@ -50,9 +50,6 @@ class TextQuestion(Question):
         from .forms import TextQuestionForm
         return TextQuestionForm
 
-    def __str__(self):
-        return Question.text
-
 
 class Choice(TimeStampedModel):
     '''
@@ -88,9 +85,6 @@ class ChoiceQuestion(Question):
 
         from .forms import ChoiceQuestionForm
         return ChoiceQuestionForm
-
-    def __str__(self):
-        return Question.text
 
 
 # meant to be a abstract survey, identified by name for purpose

@@ -235,7 +235,7 @@ class CreateSurveyForm(forms.ModelForm):
 
 class EditSurveyQuestionsForm(forms.ModelForm):
     questions = forms.ModelMultipleChoiceField(
-        Question.objects.all().order_by('text'),
+        Question.objects.all(),
         required=True,
         help_text="Select questions to include on this survey.  Field can be used to search available questions.",
         widget=MultipleSelectWithPop(attrs={'size': '11'}))
