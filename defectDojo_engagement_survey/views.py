@@ -381,6 +381,7 @@ def create_question(request):
     choiceQuestionFrom = CreateChoiceQuestionForm()
     created_question = None
     req = request.POST
+    get = request.GET
 
     if request.method == 'POST':
         form = CreateQuestionForm(request.POST)
