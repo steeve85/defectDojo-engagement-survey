@@ -242,7 +242,7 @@ class EditSurveyQuestionsForm(forms.ModelForm):
 
     class Meta:
         model = Engagement_Survey
-        exclude = ['name', 'description', 'active']
+        exclude = ['description', 'active']
 
 
 class CreateQuestionForm(forms.Form):
