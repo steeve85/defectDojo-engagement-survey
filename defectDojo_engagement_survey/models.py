@@ -160,8 +160,8 @@ class ChoiceAnswer(Answer):
         else:
             return 'No Response'
 
-
-auditlog.register(Answer)
-auditlog.register(Answered_Survey)
-# auditlog.register(Question) CAUSING ISSUES INSTALLING FIXUTRES.
-auditlog.register(Engagement_Survey)
+# Causing issues in various places.
+# auditlog.register(Answer)
+# auditlog.register(Answered_Survey)
+# auditlog.register(Question)
+# auditlog.register(Engagement_Survey)
