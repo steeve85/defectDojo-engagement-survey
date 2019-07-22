@@ -106,7 +106,7 @@ def answer_survey(request, eid, sid):
                                  'Successfully answered, all answers valid.',
                                  extra_tags='alert-success')
             return HttpResponseRedirect(
-                    reverse('view_engagement', args=(new_eng.id, )))
+                    reverse('view_engagement', args=(engagement.id, )))
         else:
             messages.add_message(request,
                                  messages.ERROR,
@@ -245,7 +245,7 @@ def delete_survey(request, sid):
     survey = get_object_or_404(Engagement_Survey, id=sid)
     form = Delete_Eng_Survey_Form(instance=survey)
 
-    from django.contrib.admin.util import NestedObjects
+    from django.contrib.admin.utils import NestedObjects
     from django.db import DEFAULT_DB_ALIAS
 
     collector = NestedObjects(using=DEFAULT_DB_ALIAS)
