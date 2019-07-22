@@ -330,6 +330,7 @@ def edit_survey_questions(request, sid):
                                  messages.SUCCESS,
                                  'Survey questions successfully saved.',
                                  extra_tags='alert-success')
+            return HttpResponseRedirect(reverse('surveys'))
         else:
             messages.add_message(request,
                                  messages.ERROR,
