@@ -383,6 +383,7 @@ def create_question(request):
 
     if request.method == 'POST':
         req = request.POST
+        raise Exception('Stop')
         form = CreateQuestionForm(request.POST)
         textQuestionForm = CreateTextQuestionForm(request.POST)
         choiceQuestionFrom = CreateChoiceQuestionForm(request.POST)
