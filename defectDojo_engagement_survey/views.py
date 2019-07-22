@@ -448,7 +448,7 @@ def edit_question(request, qid):
 
     if survey:
         answered = Answered_Survey.objects.filter(survey=survey[0])
-        if len(answered) > 0:
+        if answered.count() > 0:
             messages.add_message(request,
                                  messages.ERROR,
                                  'This question is part of an already answered survey. If you change it, the responses '
