@@ -105,6 +105,8 @@ def answer_survey(request, eid, sid):
                                  messages.SUCCESS,
                                  'Successfully answered, all answers valid.',
                                  extra_tags='alert-success')
+            return HttpResponseRedirect(
+                    reverse('view_engagement', args=(new_eng.id, )))
         else:
             messages.add_message(request,
                                  messages.ERROR,
