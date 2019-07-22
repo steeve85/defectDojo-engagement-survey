@@ -26,9 +26,7 @@ class QuestionTypeFilter(ChoiceFilter):
         return qs.filter(polymorphic_ctype=ContentType.objects.get_for_model(TextQuestion))
 
     def choice_question(self, qs, name):
-        return qs.filter(**{
-            'polymorphic_ctype': 'choice question',
-        })
+        return qs.filter(polymorphic_ctype=ContentType.objects.get_for_model(ChoiceQuestion))
 
     options = {
         '': (_('Any'), any),
