@@ -382,7 +382,7 @@ def create_question(request):
     created_question = None
 
     if request.method == 'POST':
-        if request.POST['return'] is not None:
+        if 'return' in request.POST:
             return HttpResponseRedirect(reverse('survey'))
         form = CreateQuestionForm(request.POST)
         textQuestionForm = CreateTextQuestionForm(request.POST)
