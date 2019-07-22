@@ -48,9 +48,7 @@
                     {% include "dojo/form_fields.html" with form=choiceForm %}
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-5 pull-left">
-                            <input class="btn btn-primary" type="button" name="return" value="Return">
-                                <a href="{% url 'survey' %}"/>
-                            <input/>
+                            <input class="btn btn-primary" type="button" href="{% url 'survey' %}" name="return" value="Return"/>
                         </div>
                         <div class="col-sm-offset-2 col-sm-5 pull-right">
                             <input class="btn btn-primary" type="submit" name="submit" value="Submit"/>
