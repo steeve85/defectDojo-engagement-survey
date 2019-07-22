@@ -287,7 +287,7 @@ def create_survey(request):
             if 'add_questions' in request.POST:
                 return HttpResponseRedirect(reverse('edit_survey_questions', args=(survey.id,)))
             else:
-                return HttpResponseRedirect(reverse('survey', args=(survey.id,)))
+                return HttpResponseRedirect(reverse('survey'))
         else:
             messages.add_message(request,
                                  messages.ERROR,
