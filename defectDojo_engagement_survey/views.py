@@ -392,7 +392,7 @@ def create_question(request):
                 if textQuestionForm.is_valid():
                     created_question = TextQuestion.objects.create(optional=form.cleaned_data['optional'],
                                                                    order=form.cleaned_data['order'],
-                                                                   text=textQuestionForm.cleaned_data['text'])
+                                                                   text=form.cleaned_data['text'])
                     messages.add_message(request,
                                          messages.SUCCESS,
                                          'Text Question added successfully.',
@@ -406,7 +406,7 @@ def create_question(request):
 
                     created_question = ChoiceQuestion.objects.create(optional=form.cleaned_data['optional'],
                                                                      order=form.cleaned_data['order'],
-                                                                     text=choiceQuestionFrom.cleaned_data['c_text'],
+                                                                     text=form.cleaned_data['c_text'],
                                                                      multichoice=choiceQuestionFrom.cleaned_data[
                                                                          'multichoice'])
 

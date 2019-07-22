@@ -252,13 +252,12 @@ class CreateQuestionForm(forms.Form):
                                   initial=False,
                                   required=False,
                                   widget=forms.CheckboxInput(attrs={'data-type': 'both'}))
-
-
-class CreateTextQuestionForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea(attrs={'data-type': 'text'}),
                            label="Question Text",
                            help_text="The actual question.")
 
+
+class CreateTextQuestionForm(forms.Form):
     class Meta:
         model = TextQuestion
         exclude = ['order', 'optional']
@@ -301,9 +300,6 @@ class MultiExampleField(forms.fields.MultiValueField):
 
 
 class CreateChoiceQuestionForm(forms.Form):
-    c_text = forms.CharField(widget=forms.Textarea(attrs={'data-type': 'choice'}),
-                             label="Question Text",
-                             help_text="The actual question.")
     multichoice = forms.BooleanField(required=False,
                                      initial=False,
                                      widget=forms.CheckboxInput(attrs={'data-type': 'choice'}),
