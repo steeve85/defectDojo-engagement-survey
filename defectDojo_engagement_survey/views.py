@@ -406,7 +406,7 @@ def create_question(request):
 
                     created_question = ChoiceQuestion.objects.create(optional=form.cleaned_data['optional'],
                                                                      order=form.cleaned_data['order'],
-                                                                     text=form.cleaned_data['c_text'],
+                                                                     text=form.cleaned_data['text'],
                                                                      multichoice=choiceQuestionFrom.cleaned_data[
                                                                          'multichoice'])
 
