@@ -45,7 +45,7 @@ class QuestionTypeFilter(ChoiceFilter):
             value = int(value)
         except (ValueError, TypeError):
             value = ''
-        return self.options[value][1](self, qs, 'no_name')#self.name)
+        return self.options[value][1](self, qs, self.name)
 
 
 class QuestionFilter(FilterSet):
