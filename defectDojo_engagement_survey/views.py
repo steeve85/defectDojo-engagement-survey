@@ -399,7 +399,6 @@ def create_question(request):
                                          messages.SUCCESS,
                                          'Text Question added successfully.',
                                          extra_tags='alert-success')
-                    return HttpResponseRedirect(reverse('edit_survey_questions', args=(survey.id,)))
                 else:
                     error = True
 
@@ -425,7 +424,6 @@ def create_question(request):
                                          messages.SUCCESS,
                                          'Choice Question added successfully.',
                                          extra_tags='alert-success')
-                    return HttpResponseRedirect(reverse('edit_survey_questions', args=(survey.id,)))
                 else:
                     error = True
 
