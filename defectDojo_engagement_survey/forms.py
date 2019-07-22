@@ -235,14 +235,14 @@ class CreateSurveyForm(forms.ModelForm):
 
 class EditSurveyQuestionsForm(forms.ModelForm):
     questions = forms.ModelMultipleChoiceField(
-        Question.objects.all(),
+        Question.objects.all().order_by('text'),
         required=True,
         help_text="Select questions to include on this survey.  Field can be used to search available questions.",
         widget=MultipleSelectWithPop(attrs={'size': '11'}))
 
     class Meta:
         model = Engagement_Survey
-        exclude = ['description', 'active']
+        exclude = ['name', 'description', 'active']
 
 
 class CreateQuestionForm(forms.Form):
