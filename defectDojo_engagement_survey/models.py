@@ -133,6 +133,9 @@ class Answered_Survey(models.Model):
     def __unicode__(self):
         return self.survey.name
 
+    def __str__(self):
+        return self.survey.name
+
 
 class Answer(PolymorphicModel, TimeStampedModel):
     ''' Base Answer model
