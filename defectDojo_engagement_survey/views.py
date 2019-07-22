@@ -220,13 +220,14 @@ def edit_survey(request, sid):
                                      messages.SUCCESS,
                                      'Survey successfully updated, you may now add/edit questions.',
                                      extra_tags='alert-success')
+                return HttpResponseRedirect(reverse('survey', args=(survey.id,)))
             else:
                 messages.add_message(request,
                                      messages.SUCCESS,
                                      'No changes detected, survey not updated.',
                                      extra_tags='alert-warning')
             if 'add_questions' in request.POST:
-                return HttpResponseRedirect(reverse('survey', args=(survey.id,)))
+                return HttpResponseRedirect(reverse('edit_survey_questions', args=(survey.id,)))
         else:
             messages.add_message(request,
                                  messages.ERROR,
