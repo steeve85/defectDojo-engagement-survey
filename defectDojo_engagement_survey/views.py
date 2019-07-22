@@ -446,7 +446,7 @@ def edit_question(request, qid):
     survey = Engagement_Survey.objects.filter(questions__in=[question])
     reverted = False
 
-    if survey is not None:
+    if survey:
         answered = Answered_Survey.objects.filter(survey=survey)
         if len(answered) > 0:
             messages.add_message(request,
