@@ -47,6 +47,9 @@ class TextQuestion(Question):
         from .forms import TextQuestionForm
         return TextQuestionForm
 
+    def __unicode__(self):
+        Question.__unicode__(self)
+
 
 class Choice(TimeStampedModel):
     '''
@@ -82,6 +85,9 @@ class ChoiceQuestion(Question):
 
         from .forms import ChoiceQuestionForm
         return ChoiceQuestionForm
+
+    def __unicode__(self):
+        Question.__unicode__(self)
 
 
 # meant to be a abstract survey, identified by name for purpose
