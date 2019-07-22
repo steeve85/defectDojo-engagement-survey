@@ -106,6 +106,9 @@ class Engagement_Survey(models.Model):
     def __unicode__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
 
 # meant to be an answered survey tied to an engagement
 

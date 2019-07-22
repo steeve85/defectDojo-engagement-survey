@@ -481,7 +481,7 @@ def edit_question(request, qid):
             form.save()
 
             if survey:
-                answered = Answered_Survey.objects.filter(survey__in=[survey])
+                answered = Answered_Survey.objects.filter(survey_id__in=survey.id)
                 for answered_survey in answered:
                     answered_survey.completed = False
                     answered_survey.answered_on = None
