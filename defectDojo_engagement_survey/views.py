@@ -480,6 +480,9 @@ def edit_question(request, qid):
         if form.is_valid():
             form.save()
 
+            if survey:
+                answered = Answered_Survey.objects.filter(survey=survey)
+
             for answered_survey in answered:
                 answered_survey.completed = False
                 answered_survey.answered_on = None
