@@ -47,8 +47,13 @@
                     {% include "dojo/form_fields.html" with form=textForm %}
                     {% include "dojo/form_fields.html" with form=choiceForm %}
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <input class="btn btn-primary" type="submit" name="add_endpoint" value="Submit"/>
+                        <div class="col-sm-offset-2 col-sm-10 pull-right">
+                            <input class="btn btn-primary" type="submit" name="submit" value="Submit"/>
+                        </div>
+                        <div class="col-sm-offset-2 col-sm-10 pull-left">
+                            <input class="btn btn-primary" type="button" name="return" value="Return">
+                                <a href="{% url 'edit_survey_questions survey.id %}"/>
+                            <input/>
                         </div>
                     </div>
                 </form>
