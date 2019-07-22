@@ -448,6 +448,8 @@ def edit_question(request, qid):
 
     if survey:
         answered = Answered_Survey.objects.filter(survey=survey[0])
+        length = answered.count()
+        raise Exception('sdfgh')
         if answered.count() > 0:
             messages.add_message(request,
                                  messages.ERROR,
