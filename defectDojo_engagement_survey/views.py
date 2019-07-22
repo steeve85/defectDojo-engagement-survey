@@ -226,7 +226,7 @@ def edit_survey(request, sid):
                                      'No changes detected, survey not updated.',
                                      extra_tags='alert-warning')
             if 'add_questions' in request.POST:
-                return HttpResponseRedirect(reverse('edit_survey_questions', args=(survey.id,)))
+                return HttpResponseRedirect(reverse('survey', args=(survey.id,)))
         else:
             messages.add_message(request,
                                  messages.ERROR,
@@ -287,7 +287,7 @@ def create_survey(request):
             if 'add_questions' in request.POST:
                 return HttpResponseRedirect(reverse('edit_survey_questions', args=(survey.id,)))
             else:
-                return HttpResponseRedirect(reverse('edit_survey', args=(survey.id,)))
+                return HttpResponseRedirect(reverse('survey', args=(survey.id,)))
         else:
             messages.add_message(request,
                                  messages.ERROR,
@@ -491,6 +491,7 @@ def edit_question(request, qid):
                                  messages.SUCCESS,
                                  'Question updated successfully.',
                                  extra_tags='alert-success')
+            return HttpResponseRedirect(reverse('questions'))
     add_breadcrumb(title="Edit Question", top_level=False, request=request)
     return render(request, 'defectDojo-engagement-survey/edit_question.html', {
         'name': 'Edit Question',
