@@ -36,25 +36,26 @@
 <body>
 <!-- Page Content -->
 
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <form method="post" class="form-horizontal">
-                <legend>{{ name }}</legend>
-                {% csrf_token %}
-                {% include "dojo/form_fields.html" with form=form %}
-                {% include "dojo/form_fields.html" with form=textForm %}
-                {% include "dojo/form_fields.html" with form=choiceForm %}
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <input class="btn btn-primary" type="submit" name="add_endpoint" value="Submit"/>
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form method="post" class="form-horizontal">
+                    <legend>{{ name }}</legend>
+                    {% csrf_token %}
+                    {% include "dojo/form_fields.html" with form=form %}
+                    {% include "dojo/form_fields.html" with form=textForm %}
+                    {% include "dojo/form_fields.html" with form=choiceForm %}
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input class="btn btn-primary" type="submit" name="add_endpoint" value="Submit"/>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+{% endblock %}
 <!-- /.container -->
 
 <!-- /#wrapper -->
