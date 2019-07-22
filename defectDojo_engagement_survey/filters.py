@@ -22,9 +22,7 @@ class QuestionTypeFilter(ChoiceFilter):
         return qs.all()
 
     def text_question(self, qs, name):
-        return qs.filter(**{
-            'polymorphic_ctype__icontains': 'text question',
-        })
+        return qs.filter(polymorphic_ctype__icontains='text question')
 
     def choice_question(self, qs, name):
         return qs.filter(**{
