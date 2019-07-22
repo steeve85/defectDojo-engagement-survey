@@ -1,8 +1,9 @@
 from django.utils.translation import ugettext_lazy as _
 from django.utils import six
 from django_filters import FilterSet, CharFilter, BooleanFilter, ChoiceFilter
+from django.contrib.contenttypes.models import ContentType
 
-from .models import Engagement_Survey, Question
+from .models import Engagement_Survey, Question, TextQuestion, ChoiceQuestion
 
 
 class SurveyFilter(FilterSet):
@@ -22,7 +23,7 @@ class QuestionTypeFilter(ChoiceFilter):
         return qs.all()
 
     def text_question(self, qs, name):
-        return qs.filter(polymorphic_ctype='text question')
+        return qs.filter(polymorphic_ctype=ContentType.objects.get_for_model(TextQuestion))
 
     def choice_question(self, qs, name):
         return qs.filter(**{
