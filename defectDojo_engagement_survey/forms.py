@@ -10,6 +10,7 @@ from crispy_forms.layout import Layout
 from django import forms
 from django.db.models import Count
 from dojo.forms import MultipleSelectWithPop
+from dojo.models import User
 
 from .models import Engagement_Survey, Answered_Survey, TextAnswer, ChoiceAnswer, Choice, Question, TextQuestion, \
     ChoiceQuestion
@@ -344,8 +345,8 @@ class AddChoicesForm(forms.ModelForm):
 
 
 class AssignUserForm(forms.ModelForm):
-    assignee = forms.CharField(widget=forms.SelectMultiple(choices=[]),
-                                required=False)
+    assignee = forms.ModelChoiceField(queryset=User.objects.all().order_by('name'),
+                                       required=False)
 
     class Meta:
         model = Answered_Survey
