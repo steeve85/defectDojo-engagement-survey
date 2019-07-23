@@ -5,6 +5,7 @@ Created on Feb 18, 2015
 '''
 from django import template
 from ..models import Answered_Survey, Engagement_Survey
+from ..forms import AssignUserForm
 
 register = template.Library()
 
@@ -13,7 +14,8 @@ register = template.Library()
 def show_surveys(engagement, users):
     surveys = Answered_Survey.objects.filter(engagement=engagement)
     return {'surveys': surveys,
-            'users': users}
+            'users': users,
+            'form': AssignUserForm}
 
 
 @register.inclusion_tag('defectDojo-engagement-survey/add_surveys.html')

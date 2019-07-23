@@ -79,6 +79,7 @@ def answer_survey(request, eid, sid):
     questions = get_answered_questions(survey=survey, read_only=False)
 
     if request.method == 'POST':
+        raise Exception("A SER")
         questions = [
             q.get_form()(request.POST or None,
                          prefix=str(q.id),

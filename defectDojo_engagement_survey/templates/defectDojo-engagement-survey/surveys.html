@@ -21,7 +21,6 @@
                             <option>{{ user.username }}</option>
                         {% endfor %}
                     </select>
-                    <input class="btn btn-primary" type="submit" value="Assign"/>
                 </td>
                 <td>{{ survey.responder }}</td>
                 <td>
@@ -44,6 +43,8 @@
                                href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer"> Edit
                                 Responses </a>
                         {% endif %}
+                        <a class="btn btn-sm btn-secondary"
+                               href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer"> Assign User </a>
                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                 data-target="#shareSurveyModal"
                                 data-whatever="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer">
