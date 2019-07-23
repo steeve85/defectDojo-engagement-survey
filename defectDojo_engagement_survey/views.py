@@ -80,7 +80,7 @@ def answer_survey(request, eid, sid):
 
     if request.method == 'POST':
         if 'assignee' in request.POST:
-            form = AddEndpointForm(request.POST)
+            form = AssignUserForm(request.POST)
             user_id = request.POST['assignee']
             user = User.objects.get(id=int(request.POST['assignee']))
             survey.assignee = user
