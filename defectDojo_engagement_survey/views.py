@@ -21,7 +21,7 @@ from defectDojo_engagement_survey.models import Question
 from dojo.models import Engagement, User
 from dojo.utils import add_breadcrumb, get_page_items
 from .forms import Add_Survey_Form, Delete_Survey_Form, CreateSurveyForm, Delete_Eng_Survey_Form, \
-    EditSurveyQuestionsForm, CreateQuestionForm, CreateTextQuestionForm, \
+    EditSurveyQuestionsForm, CreateQuestionForm, CreateTextQuestionForm, AssignUserForm, \
     CreateChoiceQuestionForm, EditTextQuestionForm, EditChoiceQuestionForm, AddChoicesForm
 from .models import Answered_Survey, Engagement_Survey, Answer, TextQuestion, ChoiceQuestion, Choice
 
