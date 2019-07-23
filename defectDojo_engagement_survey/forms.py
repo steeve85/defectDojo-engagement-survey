@@ -345,12 +345,14 @@ class AddChoicesForm(forms.ModelForm):
 
 
 class AssignUserForm(forms.ModelForm):
-    assignee = forms.ModelChoiceField(queryset=User.objects.all().order_by('username'),
-                                       required=False, empty_label='Not assigned')
+    assignee = forms.ModelChoiceField(required=False, empty_label='Not assigned')
 
     def __init__(self, *args, **kwargs):
+        assignee = None
+        if 'assignee' in kwargs:
+            assignee = kwargs.pop('asignees')
         super(AssignUserForm, self).__init__(*args, **kwargs)
-        if 'assignee' not in kwargs:
+        if assignee is None:
             self.fields['assignee'] = forms.ModelChoiceField(queryset=User.objects.all())
         else:
             raise Exception('sdg')
