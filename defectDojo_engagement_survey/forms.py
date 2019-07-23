@@ -345,7 +345,7 @@ class AddChoicesForm(forms.ModelForm):
 
 
 class AssignUserForm(forms.ModelForm):
-    assignee = forms.ModelChoiceField(queryset=User.objects.all().order_by('name'),
+    assignee = forms.ModelChoiceField(queryset=User.objects.all().order_by('username'),
                                        required=False)
 
     class Meta:
