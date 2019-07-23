@@ -15,6 +15,7 @@
                 <td><a href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}">{{ survey.survey.name }}</a>
                 </td>  
                 <td>
+                    {% include "dojo/form_fields.html" with form=form %}
                     <select class="mdb-select md-form" searchable="Search here..">
                         <option value="" disabled selected>Select a user</option>
                         {% for user in users %}
@@ -43,7 +44,7 @@
                                href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer"> Edit
                                 Responses </a>
                         {% endif %}
-                        <a class="btn btn-sm btn-secondary"
+                        <a class="btn btn-sm btn-secondary" method="post"
                                href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer"> Assign User </a>
                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                 data-target="#shareSurveyModal"
