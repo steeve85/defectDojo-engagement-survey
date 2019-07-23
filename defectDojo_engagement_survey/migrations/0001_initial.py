@@ -153,11 +153,11 @@ class Migration(migrations.Migration):
             name='responder',
             field=models.ForeignKey(blank=True, default=None, null=True, editable=True, on_delete=django.db.models.deletion.CASCADE, related_name='responder', to=settings.AUTH_USER_MODEL),
         ),
-        # migrations.AddField(
-        #     model_name='answered_survey',
-        #     name='assignee',
-        #     field=models.ForeignKey(blank=True, default=None, null=True, editable=True, on_delete=django.db.models.deletion.CASCADE, related_name='assignee', to=settings.AUTH_USER_MODEL),
-        # ),
+        migrations.AddField(
+            model_name='answered_survey',
+            name='assignee',
+            field=models.ForeignKey(blank=True, default=None, null=True, editable=True, on_delete=django.db.models.deletion.CASCADE, related_name='assignee', to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='answered_survey',
             name='survey',
