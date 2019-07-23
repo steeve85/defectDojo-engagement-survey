@@ -67,9 +67,6 @@ def delete_engagement_survey(request, eid, sid):
 
 
 def answer_survey(request, eid, sid):
-    get = request.GET
-    req = request.POST
-    raise Exception("A SER")
     survey = get_object_or_404(Answered_Survey, id=sid)
     engagement = get_object_or_404(Engagement, id=eid)
     prod = engagement.product
@@ -82,6 +79,10 @@ def answer_survey(request, eid, sid):
     questions = get_answered_questions(survey=survey, read_only=False)
 
     if request.method == 'POST':
+        if 'assignee' in request.POST:
+            survey.assignee = request.POST['assignee']
+            survey.save()
+            return HttpResponseRedirect(reverse('view_engagement', args=(engagement.id,)))
         questions = [
             q.get_form()(request.POST or None,
                          prefix=str(q.id),
