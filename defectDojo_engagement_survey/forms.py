@@ -199,7 +199,8 @@ class Add_Survey_Form(forms.ModelForm):
         exclude = ('responder',
                    'completed',
                    'engagement',
-                   'answered_on')
+                   'answered_on',
+                   'assignee')
 
 
 class Delete_Survey_Form(forms.ModelForm):
