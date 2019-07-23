@@ -16,12 +16,14 @@
                 </td>  
                 <td>
                     <select class="mdb-select md-form" searchable="Search here..">
-                        <option value="" disabled selected>Assign a user</option>
+                        <option value="" disabled selected>Choose your country</option>
                         <option value="1">USA</option>
-                        {% comment %} {% for user in users %}
-                            <option>{{ user.name }}</option>
-                        {% endfor %} {% endcomment %}
+                        <option value="2">Germany</option>
+                        <option value="3">France</option>
+                        <option value="3">Poland</option>
+                        <option value="3">Japan</option>
                     </select>
+                    <label class="mdb-main-label">Label example</label>
                 </td>
                 <td>{{ survey.responder }}</td>
                 <td>
