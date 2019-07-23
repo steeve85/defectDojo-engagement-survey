@@ -84,6 +84,11 @@ def answer_survey(request, eid, sid):
             user = User.objects.get(id=int(request.POST['assignee']))
             survey.assignee = user
             survey.save()
+            message_string = 'Successfully assigned %s to %s' (user.username, survey.name)
+            messages.add_message(request,
+                                 messages.SUCCESS,
+                                 message_string,
+                                 extra_tags='alert-success')
             return HttpResponseRedirect(reverse('view_engagement', args=(engagement.id,)))
         questions = [
             q.get_form()(request.POST or None,

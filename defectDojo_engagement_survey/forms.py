@@ -346,7 +346,17 @@ class AddChoicesForm(forms.ModelForm):
 
 class AssignUserForm(forms.ModelForm):
     assignee = forms.ModelChoiceField(queryset=User.objects.all().order_by('username'),
-                                       required=False)
+                                       required=False, empty_label='Not assigned')
+
+    def __init__(self, *args, **kwargs):
+        assignee = None
+        if 'assignee' in kwargs:
+            assignee = kwargs.pop('assignee')
+        super(AssignUserForm, self).__init__(*args, **kwargs)
+        if assignee is None:
+            self.fields['assignee'] = forms.ModelChoiceField(queryset=User.objects.all())
+        else:
+            self.fields['assignee'].initial = assignee.id
 
     class Meta:
         model = Answered_Survey
