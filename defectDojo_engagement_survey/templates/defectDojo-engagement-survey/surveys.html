@@ -44,7 +44,8 @@
                                href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer"> Edit
                                 Responses </a>
                         {% endif %}
-                        <form action="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer" method="post">
+                        <form action="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer" method="post" style="display:inline">
+                            {% csrf_token %}
                             <button class="btn btn-sm btn-primary" type="submit"> Assign User </button>
                         </form>
                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
