@@ -18,7 +18,7 @@ from pytz import timezone
 
 from defectDojo_engagement_survey.filters import SurveyFilter, QuestionFilter
 from defectDojo_engagement_survey.models import Question
-from dojo.models import Engagement
+from dojo.models import Engagement, User
 from dojo.utils import add_breadcrumb, get_page_items
 from .forms import Add_Survey_Form, Delete_Survey_Form, CreateSurveyForm, Delete_Eng_Survey_Form, \
     EditSurveyQuestionsForm, CreateQuestionForm, CreateTextQuestionForm, \
@@ -80,7 +80,9 @@ def answer_survey(request, eid, sid):
 
     if request.method == 'POST':
         if 'assignee' in request.POST:
-            survey.assignee = request.POST['assignee']
+            user_id = request.POST['assignee']
+            user = User.objects.get(id=int(request.POST['assignee']))
+            survey.assignee = user
             survey.save()
             return HttpResponseRedirect(reverse('view_engagement', args=(engagement.id,)))
         questions = [
