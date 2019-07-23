@@ -350,7 +350,7 @@ class AssignUserForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(AssignUserForm, self).__init__(*args, **kwargs)
-        if assignee is None:
+        if 'assignee' not in kwargs:
             self.fields['assignee'] = forms.ModelChoiceField(queryset=User.objects.all())
         else:
             raise Exception('sdg')
