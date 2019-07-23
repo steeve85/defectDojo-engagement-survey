@@ -354,7 +354,7 @@ class AssignUserForm(forms.ModelForm):
             assignee = kwargs.pop('asignees')
         super(AssignUserForm, self).__init__(*args, **kwargs)
         if assignee is None:
-            self.fields['assignee'] = forms.ModelChoiceField(queryset=User.objects.all())
+            self.fields['assignee'] = forms.ModelChoiceField(queryset=User.objects.all(), empty_label='Not Assigned')
         else:
             raise Exception('sdg')
             self.fields['assignee'].initial = assignee.id
