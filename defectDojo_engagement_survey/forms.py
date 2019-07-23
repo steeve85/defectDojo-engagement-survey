@@ -341,3 +341,12 @@ class AddChoicesForm(forms.ModelForm):
     class Meta:
         model = Choice
         exclude = []
+
+
+class AssignUserForm(forms.ModelForm):
+    assignee = forms.CharField(widget=forms.SelectMultiple(choices=[]),
+                                required=False)
+
+    class Meta:
+        model = Answered_Survey
+        exclude = ['engagement', 'survey', 'responder', 'completed', 'answered_on']
