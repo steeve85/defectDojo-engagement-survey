@@ -3,6 +3,7 @@
         <thead>
         <tr>
             <th>Name</th>
+            <th>Assignee</th>
             <th>Responder</th>
             <th>Status</th>
             <th>Completion Date</th>
@@ -12,10 +13,16 @@
         {% for survey in surveys %}
             <tr>
                 <td><a href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}">{{ survey.survey.name }}</a>
-                </td>
+                </td>  
                 <td>
-                    
-                </td>    
+                    <select>
+                        <option disabled selected value> -- select an option -- </option>
+                        <option>Option 1</option>
+                        {% comment %} {% for user in users %}
+                            <option>{{ user.name }}</option>
+                        {% endfor %} {% endcomment %}
+                    </select>
+                </td>
                 <td>{{ survey.responder }}</td>
                 <td>
                     {% if survey.completed %}
