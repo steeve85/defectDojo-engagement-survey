@@ -12,7 +12,6 @@ register = template.Library()
 @register.inclusion_tag('defectDojo-engagement-survey/surveys.html')
 def show_surveys(engagement, users):
     surveys = Answered_Survey.objects.filter(engagement=engagement)
-    raise Exception('sdgdfgh')
     return {'surveys': surveys,
             'users': users}
 

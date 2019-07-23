@@ -1,4 +1,7 @@
 {% if surveys %}
+{% for user in users %}
+                            {{ user.name }}
+                        {% endfor %}
     <table id="surveys" class="tablesorter-bootstrap table table-condensed table-striped">
         <thead>
         <tr>
