@@ -67,7 +67,8 @@ def delete_engagement_survey(request, eid, sid):
 
 
 def answer_survey(request, eid, sid):
-    req = request.GET
+    get = request.GET
+    req = request.POST
     raise Exception("A SER")
     survey = get_object_or_404(Answered_Survey, id=sid)
     engagement = get_object_or_404(Engagement, id=eid)
