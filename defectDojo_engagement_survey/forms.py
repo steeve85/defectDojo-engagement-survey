@@ -345,7 +345,7 @@ class AddChoicesForm(forms.ModelForm):
 
 
 class AssignUserForm(forms.ModelForm):
-    assignee = forms.CharField(required=False, empty_label='Not assigned',
+    assignee = forms.CharField(required=False,
                                 widget=forms.widgets.HiddenInput())
 
     def __init__(self, *args, **kwargs):
