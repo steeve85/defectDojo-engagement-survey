@@ -1,7 +1,7 @@
 {% if surveys %}
-    USRES
+    USERS
     {% for user in users %}
-        {{ user.name }}
+        {{ user.username }}
     {% endfor %}
     <table id="surveys" class="tablesorter-bootstrap table table-condensed table-striped">
         <thead>
@@ -22,7 +22,7 @@
                     <select class="mdb-select md-form" searchable="Search here..">
                         <option value="" disabled selected>Select a user</option>
                         {% for user in users %}
-                            <option>{{ user.name }}</option>
+                            <option>{{ user.username }}</option>
                         {% endfor %}
                     </select>
                 </td>
