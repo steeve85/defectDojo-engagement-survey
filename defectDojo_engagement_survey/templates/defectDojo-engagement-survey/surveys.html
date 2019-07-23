@@ -12,17 +12,8 @@
         </thead>
         {% for survey in surveys %}
             <tr>
-                <td><a href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}">{{ survey.survey.name }}</a>
-                </td>  
-                <td>
-                    {{ form.assignee }}
-                    {% comment %} <select class="mdb-select md-form" searchable="Search here..">
-                        <option value="" disabled selected>Select a user</option>
-                        {% for user in users %}
-                            <option>{{ user.username }}</option>
-                        {% endfor %}
-                    </select> {% endcomment %}
-                </td>
+                <td><a href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}">{{ survey.survey.name }}</a></td>  
+                <td>{{ form.assignee }}</td>
                 <td>{{ survey.responder }}</td>
                 <td>
                     {% if survey.completed %}
@@ -44,10 +35,8 @@
                                href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer"> Edit
                                 Responses </a>
                         {% endif %}
-                        <form action="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer" method="post" style="display:inline">
-                            {% csrf_token %}
-                            <button class="btn btn-sm btn-primary" type="submit"> Assign User </button>
-                        </form>
+                        <button class="btn btn-sm btn-primary" type="submit"
+                                data-whatever="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer">Assign User </button>
                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                 data-target="#shareSurveyModal"
                                 data-whatever="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer">
