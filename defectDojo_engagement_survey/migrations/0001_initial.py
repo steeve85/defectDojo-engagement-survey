@@ -155,6 +155,11 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='answered_survey',
+            name='assignee',
+            field=models.ForeignKey(blank=True, default=None, null=True, editable=True, on_delete=django.db.models.deletion.CASCADE, related_name='assignee', to=settings.AUTH_USER_MODEL),
+        ),
+        migrations.AddField(
+            model_name='answered_survey',
             name='survey',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Engagement_Survey'),
         ),

@@ -119,6 +119,9 @@ class Answered_Survey(models.Model):
                                    on_delete=models.CASCADE)
     # what surveys have been answered
     survey = models.ForeignKey(Engagement_Survey, on_delete=models.CASCADE)
+    assignee = models.ForeignKey(User, related_name='assignee',
+                                  null=True, blank=True, editable=True,
+                                  default=None, on_delete=models.CASCADE)
     # who answered it
     responder = models.ForeignKey(User, related_name='responder',
                                   null=True, blank=True, editable=True,
