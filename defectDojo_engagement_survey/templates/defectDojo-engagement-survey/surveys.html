@@ -15,7 +15,7 @@
                 <td><a href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}">{{ survey.survey.name }}</a>
                 </td>  
                 <td>
-                    {{ form }}
+                    {{ form.assignee }}
                     {% comment %} <select class="mdb-select md-form" searchable="Search here..">
                         <option value="" disabled selected>Select a user</option>
                         {% for user in users %}
