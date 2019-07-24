@@ -80,11 +80,11 @@ def answer_survey(request, eid, sid):
 
     if request.method == 'POST':
         if 'assignee' in request.POST:
-            form = AssignUserForm(request.POST)
             user_id = request.POST['assignee']
             user = User.objects.get(id=int(request.POST['assignee']))
             survey.assignee = user
             survey.save()
+            form = AssignUserForm(request.POST)
             message_string = 'Successfully assigned ' + user.username
             messages.add_message(request,
                                  messages.SUCCESS,
