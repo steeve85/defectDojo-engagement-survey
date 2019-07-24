@@ -344,13 +344,14 @@ class AddChoicesForm(forms.ModelForm):
         exclude = []
 
 
-class AssignUserForm(forms.ModelForm):
+class AssignUserForm(forms.Form):
     assignee = forms.CharField(required=False,
                                 widget=forms.widgets.HiddenInput())
 
     def __init__(self, *args, **kwargs):
         import sys
-        for k,v in kwargs.items():
+        sys.stderr.write("Printing kwargs...")
+        for k, v in kwargs.items():
             sys.stderr.write("Key  : " + k)
             sys.stderr.write("Value: " + v + "\n")
         assignee = None
