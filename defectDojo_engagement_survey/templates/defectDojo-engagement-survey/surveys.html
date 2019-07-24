@@ -40,7 +40,7 @@
                                href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer"> Edit
                                 Responses </a>
                         {% endif %}
-                        <input class="btn btn-sm btn-primary" type="submit" form="id_assignee" value="Assign User"/>
+                        <input class="btn btn-sm btn-primary" type="submit" form="id_assignee" value="Assign User" formnovalidate=true/>
                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                 data-target="#shareSurveyModal"
                                 data-whatever="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer">
