@@ -352,12 +352,13 @@ class AssignUserForm(forms.ModelForm):
         assignee = None
         if 'assignee' in kwargs:
             assignee = kwargs.pop('asignees')
+        super(AssignUserForm, self).__init__(*args, **kwargs)
+        raise Exception('Stop')
         if assignee is None:
             self.fields['assignee'] = forms.ModelChoiceField(queryset=User.objects.all(), empty_label='Not Assigned')
         else:
             raise Exception('sdg')
             self.fields['assignee'].initial = assignee.id
-        super(AssignUserForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Answered_Survey
