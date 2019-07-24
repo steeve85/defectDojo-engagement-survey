@@ -350,10 +350,10 @@ class AssignUserForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         import sys
-        sys.stderr.write("Printing kwargs...")
+        sys.stderr.write("\nPrinting kwargs...")
         for k, v in kwargs.items():
-            sys.stderr.write("Key  : " + k)
-            sys.stderr.write("Value: " + v + "\n")
+            sys.stderr.write("\nKey  : " + k)
+            sys.stderr.write("\nValue: " + v + "\n")
         assignee = None
         if 'assignee' in kwargs:
             assignee = kwargs.pop('asignees')
