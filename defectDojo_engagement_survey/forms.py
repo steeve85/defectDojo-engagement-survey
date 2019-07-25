@@ -364,7 +364,6 @@ class AssignUserForm(forms.ModelForm):
         else:
             raise Exception('Stop')
             self.fields['assignee'].initial = assignee.id
-        if Answered_Survey.objects.get()
 
     class Meta:
         model = Answered_Survey
