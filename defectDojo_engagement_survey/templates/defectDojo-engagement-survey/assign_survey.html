@@ -1,19 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<h3>Add Survey to {{engagement}}</h3>
-{% if surveys %}
+	<h3>Assign User to {{ survey }}</h3>
 	<form class="form-horizontal" method="post">{% csrf_token %}
-	{% include "dojo/form_fields.html" with form=form %}
-	<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-	   <input class="btn btn-primary" type="submit" name="assign_survey" value="Assign Survey" /> 
-	   <a class="btn btn-primary" href="/engagement/{{ survey.engagement.id }}"> Return </a>
-	</div>
-	</div>
+		{% include "dojo/form_fields.html" with form=form %}
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<input class="btn btn-primary" type="submit" name="assign_survey" value="Assign Survey" /> 
+				<a class="btn btn-primary" href="/engagement/{{ survey.engagement.id }}"> Return </a>
+			</div>
+		</div>
 	</form>
-{% else %}
-    <p>
-        All available surveys have been added to this engagement.
-    </p>
-{% endif %}
 {% endblock %}
