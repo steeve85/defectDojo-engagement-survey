@@ -14,7 +14,7 @@
             <tr>
                 <td><a href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}">{{ survey.survey.name }}</a></td>  
                 <td>
-                    {% if survey.assignee == 'None' %}
+                    {% if survey.assignee == None %}
                         Not Assigned
                     {% else %}
                         {{ survey.assignee.username }} 
