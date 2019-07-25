@@ -52,4 +52,7 @@ urlpatterns = [
     url(r'^engagement/(?P<eid>\d+)/survey/(?P<sid>\d+)$',
         views.view_survey,
         name='view_survey'),
+    url(r'^engagement/(?P<eid>\d+)/survey/(?P<sid>\d+)/assign',
+        views.assign_survey,
+        name='assign_survey'),
 ]

@@ -134,6 +134,37 @@ def answer_survey(request, eid, sid):
                    })
 
 
+def assign_survey(request, eid, sid):
+    survey = get_object_or_404(Answered_Survey, id=sid)
+    engagement = get_object_or_404(Engagement, id=eid)
+    prod = engagement.product
+
+    auth = request.user.is_staff or request.user in prod.authorized_users.all()
+    if not auth:
+        # will render 403
+        raise PermissionDenied
+
+    form = AssignUserForm()
+    if request.method == 'POST':
+        form = AssignUserForm(request.POST)
+        if form.is_valid():
+            user_id = req['assignee']
+            user = User.objects.get(id=int(req['assignee']))
+            survey.assignee = user
+            survey.save()
+            message_string = 'Successfully assigned ' + user.username
+            messages.add_message(request,
+                                messages.SUCCESS,
+                                message_string,
+                                extra_tags='alert-success')
+            return HttpResponseRedirect(reverse('view_engagement', args=(engagement.id,)))
+    add_breadcrumb(title="Assign Survey", top_level=False, request=request)
+    return render(request,
+                  'defectDojo-engagement-survey/assign_survey.html',
+                  {'survey': survey,
+                   'form': form,
+                   })
+
 @user_passes_test(lambda u: u.is_staff)
 def view_survey(request, eid, sid):
     survey = get_object_or_404(Answered_Survey, id=sid)

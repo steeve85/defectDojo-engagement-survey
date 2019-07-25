@@ -14,18 +14,11 @@
             <tr>
                 <td><a href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}">{{ survey.survey.name }}</a></td>  
                 <td>
-                    <form id="id_assignee" action="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer" method="post" style="display:inline">
-                        {% csrf_token %}
-                        {% for form_item in forms %}
-                            {% comment %} {% if form_item.survey.id == survey.id %} {% endcomment %}
-                                {{ form_item.assignee }}
-                            {% comment %} {% else %}
-                                <p>Survey ID :: {{ survey.id }}</p>
-                                <p>Form_item Survey ID :: {{ form_item.survey.value }}</p>
-                            {% endif %}
-                            <p>{{ form_item.survey.value }}</p> {% endcomment %}
-                        {% endfor %}
-                    </form>
+                    {% if survey.assignee == 'None' %}
+                        Not Assigned
+                    {% else %}
+                        survey.assignee
+                    {% endif %}
                 </td>
                 <td>{{ survey.responder }}</td>
                 <td>

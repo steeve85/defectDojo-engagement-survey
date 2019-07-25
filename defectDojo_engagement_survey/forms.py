@@ -360,4 +360,4 @@ class AssignUserForm(forms.ModelForm):
 
     class Meta:
         model = Answered_Survey
-        exclude = ['engagement', 'responder', 'completed', 'answered_on']
+        exclude = ['engagement', 'survey', 'responder', 'completed', 'answered_on']
