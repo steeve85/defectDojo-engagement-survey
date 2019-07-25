@@ -356,7 +356,6 @@ class AssignUserForm(forms.ModelForm):
         if assignee is None:
             self.fields['assignee'] = forms.ModelChoiceField(queryset=User.objects.all(), empty_label='Not Assigned')
         else:
-            raise Exception('Stop')
             self.fields['assignee'].initial = assignee.id
 
     class Meta:
