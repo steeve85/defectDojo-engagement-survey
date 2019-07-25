@@ -15,7 +15,8 @@ def show_surveys(engagement, users):
     surveys = Answered_Survey.objects.filter(engagement=engagement)
     forms = []
     for survey in surveys:
-        forms.append(AssignUserForm(instance=survey))
+        f = AssignUserForm(instance=survey)
+        forms.append(f)
     return {'surveys': surveys,
             'users': users,
             'form': forms}
