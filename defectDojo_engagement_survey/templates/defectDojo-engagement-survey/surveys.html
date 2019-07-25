@@ -16,7 +16,7 @@
                 <td>
                     <form id="id_assignee" action="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/answer" method="post" style="display:inline">
                         {% csrf_token %}
-                        {{ form.assignee }}
+                        {{ form.assignee.value }}
                         <input class="btn btn-sm btn-primary" type="submit" value="Assign User" formnovalidate=true/>
                     </form>
                 </td>
