@@ -85,7 +85,7 @@ def answer_survey(request, eid, sid):
             user = User.objects.get(id=int(req['assignee']))
             survey.assignee = user
             survey.save()
-            form = AssignUserForm(req)
+            form = AssignUserForm(instance=survey)
             message_string = 'Successfully assigned ' + user.username
             messages.add_message(request,
                                  messages.SUCCESS,
