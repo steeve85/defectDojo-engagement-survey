@@ -16,7 +16,6 @@ def show_surveys(engagement, users):
     forms = []
     for survey in surveys:
         forms.append(AssignUserForm(instance=survey))
-    raise Exception('sefs')
     return {'surveys': surveys,
             'users': users,
             'form': forms}
