@@ -344,7 +344,7 @@ class AddChoicesForm(forms.ModelForm):
         exclude = []
 
 
-class AssignUserForm(forms.Form):
+class AssignUserForm(forms.ModelForm):
     assignee = forms.CharField(required=False,
                                 widget=forms.widgets.HiddenInput())
 
