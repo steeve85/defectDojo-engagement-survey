@@ -13,11 +13,12 @@ register = template.Library()
 @register.inclusion_tag('defectDojo-engagement-survey/surveys.html')
 def show_surveys(engagement, users):
     surveys = Answered_Survey.objects.filter(engagement=engagement)
+    forms = []
     for survey in surveys:
-        AssignUserForm(instance=survey)
+        forms.append(AssignUserForm(instance=survey))
     return {'surveys': surveys,
             'users': users,
-            'form': AssignUserForm}
+            'form': forms}
 
 
 @register.inclusion_tag('defectDojo-engagement-survey/add_surveys.html')

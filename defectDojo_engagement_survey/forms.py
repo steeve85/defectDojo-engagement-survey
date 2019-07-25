@@ -348,23 +348,23 @@ class AssignUserForm(forms.ModelForm):
     assignee = forms.CharField(required=False,
                                 widget=forms.widgets.HiddenInput())
 
-    # def __init__(self, *args, **kwargs):
-    #     # import sys
-    #     # sys.stderr.write("\nPrinting kwargs...")
-    #     # mapp = kwargs.items()
-    #     # for k, v in kwargs.items():
-    #     #     sys.stderr.write("\nKey  : " + k)
-    #     #     sys.stderr.write("\nValue: " + v + "\n")
-    #     # assignee = None
-    #     # if 'assignee' in kwargs:
-    #     #     assignee = kwargs.pop('asignees')
-    #     # super(AssignUserForm, self).__init__(*args, **kwargs)
-    #     # if assignee is None:
-    #     #     self.fields['assignee'] = forms.ModelChoiceField(queryset=User.objects.all(), empty_label='Not Assigned')
-    #     # else:
-    #     #     raise Exception('Stop')
-    #     #     self.fields['assignee'].initial = assignee.id
-    #     if Answered_Survey.objects.get()
+    def __init__(self, *args, **kwargs):
+        import sys
+        sys.stderr.write("\nPrinting kwargs...")
+        mapp = kwargs.items()
+        for k, v in kwargs.items():
+            sys.stderr.write("\nKey  : " + k)
+            sys.stderr.write("\nValue: " + v + "\n")
+        assignee = None
+        if 'assignee' in kwargs:
+            assignee = kwargs.pop('asignees')
+        super(AssignUserForm, self).__init__(*args, **kwargs)
+        if assignee is None:
+            self.fields['assignee'] = forms.ModelChoiceField(queryset=User.objects.all(), empty_label='Not Assigned')
+        else:
+            raise Exception('Stop')
+            self.fields['assignee'].initial = assignee.id
+        if Answered_Survey.objects.get()
 
     class Meta:
         model = Answered_Survey
