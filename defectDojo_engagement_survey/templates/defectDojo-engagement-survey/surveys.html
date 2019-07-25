@@ -18,7 +18,7 @@
                         {% csrf_token %}
                         {% for form_item in forms %}
                             {% comment %} {% if form_item.survey.id == survey.id %} {% endcomment %}
-                                {{ form_item }}
+                                {{ form_item.assignee }}
                             {% comment %} {% else %}
                                 <p>Survey ID :: {{ survey.id }}</p>
                                 <p>Form_item Survey ID :: {{ form_item.survey.value }}</p>
