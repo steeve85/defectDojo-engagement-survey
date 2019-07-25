@@ -20,11 +20,10 @@
                             {% if form_item.survey.id == survey.id %}
                                 {{ form_item.assignee }}
                             {% else %}
-                                Survey ID :: {{ survey.id }}
-                                Form_item Survey ID :: {{ form_item.survey.value }}
+                                <p>Survey ID :: {{ survey.id }}</p>
+                                <p>Form_item Survey ID :: {{ form_item.survey.value }}</p>
                             {% endif %}
-                            {{ form_item.survey.value }}
-                            NO LUCK
+                            <p>{{ form_item.survey.value }}</p>
                         {% endfor %}
                     </form>
                 </td>
