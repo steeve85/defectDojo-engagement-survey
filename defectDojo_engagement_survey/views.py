@@ -152,11 +152,6 @@ def assign_survey(request, eid, sid):
             user = form.cleaned_data['assignee']
             survey.assignee = user
             survey.save()
-            message_string = 'Successfully assigned ' + user.username
-            messages.add_message(request,
-                                messages.SUCCESS,
-                                message_string,
-                                extra_tags='alert-success')
             return HttpResponseRedirect(reverse('view_engagement', args=(engagement.id,)))
     add_breadcrumb(title="Assign Survey", top_level=False, request=request)
     return render(request,
