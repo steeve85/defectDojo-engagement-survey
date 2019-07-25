@@ -17,7 +17,7 @@
                     {% if survey.assignee == 'None' %}
                         Not Assigned
                     {% else %}
-                        survey.assignee
+                        {{ survey.assignee.username }} 
                     {% endif %}
                 </td>
                 <td>{{ survey.responder }}</td>
