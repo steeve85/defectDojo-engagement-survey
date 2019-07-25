@@ -20,8 +20,8 @@
                             {% if form.survey.id == survey.id %}
                                 {{ form.assignee }}
                             {% else %}
-                                Survey ID :: {{ suvey.id }}
-                                Form Survey ID :: {{ form.suvey.id }}
+                                Survey ID :: {{ survey.id }}
+                                Form Survey ID :: {{ form.survey.value }}
                             {% endif %}
                         {% endfor %}
                     </form>
