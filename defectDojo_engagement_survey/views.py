@@ -145,7 +145,7 @@ def assign_survey(request, eid, sid):
         # will render 403
         raise PermissionDenied
 
-    form = AssignUserForm()
+    form = AssignUserForm(instance=survey)
     if request.method == 'POST':
         form = AssignUserForm(request.POST)
         if form.is_valid():
