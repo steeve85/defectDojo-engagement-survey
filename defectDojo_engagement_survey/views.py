@@ -134,6 +134,7 @@ def answer_survey(request, eid, sid):
                    })
 
 
+@user_passes_test(lambda u: u.is_staff)
 def assign_survey(request, eid, sid):
     survey = get_object_or_404(Answered_Survey, id=sid)
     engagement = get_object_or_404(Engagement, id=eid)
@@ -148,8 +149,8 @@ def assign_survey(request, eid, sid):
     if request.method == 'POST':
         form = AssignUserForm(request.POST)
         if form.is_valid():
-            user_id = req['assignee']
-            user = User.objects.get(id=int(req['assignee']))
+            user_id = form.cleaned_data['assignee']
+            user = User.objects.get(id=int(user_id))
             survey.assignee = user
             survey.save()
             message_string = 'Successfully assigned ' + user.username
@@ -164,6 +165,7 @@ def assign_survey(request, eid, sid):
                   {'survey': survey,
                    'form': form,
                    })
+
 
 @user_passes_test(lambda u: u.is_staff)
 def view_survey(request, eid, sid):
