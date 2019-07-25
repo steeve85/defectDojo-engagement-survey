@@ -214,7 +214,8 @@ class Delete_Survey_Form(forms.ModelForm):
                    'completed',
                    'engagement',
                    'answered_on',
-                   'survey')
+                   'survey',
+                   'assignee')
 
 
 class Delete_Eng_Survey_Form(forms.ModelForm):
