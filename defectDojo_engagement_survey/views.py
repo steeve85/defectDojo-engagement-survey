@@ -70,7 +70,7 @@ def answer_survey(request, eid, sid):
     survey = get_object_or_404(Answered_Survey, id=sid)
     engagement = get_object_or_404(Engagement, id=eid)
     prod = engagement.product
-    settings = System_Settings.objects.all()
+    settings = System_Settings.objects.all()[0]
 
     if not settings.allow_anonymous_survey_repsonse:
         auth = request.user.is_staff or request.user in prod.authorized_users.all()
