@@ -226,6 +226,40 @@ def add_survey(request, eid):
 
 
 @user_passes_test(lambda u: u.is_staff)
+def add_empty_survey(request, eid):
+    user = request.user
+    surveys = Engagement_Survey.objects.all()
+    form = Add_Survey_Form()
+    if request.method == 'POST':
+        form = Add_Survey_Form(request.POST)
+        if form.is_valid():
+            survey = form.save(commit=False)
+            survey.engagement = Engagement(name="User Entry")
+            survey.save()
+            messages.add_message(request,
+                                 messages.SUCCESS,
+                                 'Engagement Created, Survey successfully added, answers pending.',
+                                 extra_tags='alert-success')
+            if 'respond_survey' in request.POST:
+                return HttpResponseRedirect(
+                    '/engagement/%s/survey/%s/answer' % (survey.engagement.id, survey.id))
+
+            return HttpResponseRedirect('/engagement/%s' % (survey.engagement.id))
+        else:
+            messages.add_message(request,
+                                 messages.ERROR,
+                                 'Survey could not be added.',
+                                 extra_tags='alert-danger')
+    form.fields["survey"].queryset = surveys
+    add_breadcrumb(title="Add Empty Survey", top_level=False, request=request)
+    return render(request, 'defectDojo-engagement-survey/add_survey.html',
+                  {'surveys': surveys,
+                   'user': user,
+                   'form': form,
+                   'engagement': engagement})
+
+
+@user_passes_test(lambda u: u.is_staff)
 def edit_survey(request, sid):
     survey = get_object_or_404(Engagement_Survey, id=sid)
     old_name = survey.name
