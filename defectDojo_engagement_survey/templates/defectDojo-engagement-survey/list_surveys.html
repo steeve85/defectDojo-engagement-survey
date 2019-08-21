@@ -90,10 +90,16 @@
                                     <td>{{ survey.answered_on }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a class="btn btn-sm btn-primary"
-                                            href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}"> View Responses </a>
-                                            <a class="btn btn-sm btn-info"
-                                            href="/engagement/{{ survey.engagement.id }}/survey/{{ survey.id }}/assign"> Assign User </a>
+                                            <a class="btn btn-sm btn-success"
+                                            href="/empty_survey/{{ survey.id }}/answer"> Answer</a>
+                s                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                                    data-target="#shareSurveyModal"
+                                                    data-whatever="/empty_survey/{{ survey.id }}/answer">
+                                                <i class="fa fa-share-alt"></i> Share Survey
+                                            </button>
+                                            <a class="btn btn-sm btn-danger"
+                                            href="empty_survey/{{ survey.id }}/delete"> Delete
+                                                Survey </a>
                                         </div>
                                     </td>
                                 </tr>

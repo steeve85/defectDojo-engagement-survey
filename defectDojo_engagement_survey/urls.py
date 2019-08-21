@@ -43,9 +43,6 @@ urlpatterns = [
     url(r'^engagement/(?P<eid>\d+)/add_survey$',
         views.add_survey,
         name='add_survey'),
-    url(r'^empty_survey$',
-        views.add_empty_survey,
-        name='add_empty_survey'),
     url(r'^engagement/(?P<eid>\d+)/survey/(?P<sid>\d+)/answer',
         views.answer_survey,
         name='answer_survey'),
@@ -58,4 +55,15 @@ urlpatterns = [
     url(r'^engagement/(?P<eid>\d+)/survey/(?P<sid>\d+)/assign',
         views.assign_survey,
         name='assign_survey'),
+
+    # Surveys without an engagemnet
+    url(r'^empty_survey$',
+        views.add_empty_survey,
+        name='add_empty_survey'),
+    url(r'^empty_survey/(?P<esid>\d+)/delete$',
+        views.delete_empty_survey,
+        name='delete_empty_survey'),
+    url(r'^empty_survey/(?P<esid>\d+)/answer$',
+        views.answer_empty_survey,
+        name='answer_empty_survey'),
 ]
