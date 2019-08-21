@@ -18,7 +18,7 @@ from pytz import timezone
 
 from defectDojo_engagement_survey.filters import SurveyFilter, QuestionFilter
 from defectDojo_engagement_survey.models import Question
-from dojo.models import Engagement, User
+from dojo.models import Engagement, System_Settings
 from dojo.utils import add_breadcrumb, get_page_items
 from .forms import Add_Survey_Form, Delete_Survey_Form, CreateSurveyForm, Delete_Eng_Survey_Form, \
     EditSurveyQuestionsForm, CreateQuestionForm, CreateTextQuestionForm, AssignUserForm, \
@@ -71,8 +71,8 @@ def answer_survey(request, eid, sid):
     engagement = get_object_or_404(Engagement, id=eid)
     prod = engagement.product
 
-    auth = request.user.is_staff or request.user in prod.authorized_users.all()
-    
+    auth = not request.user.is_anonymous()
+
     if not auth:
         # will render 403
         raise PermissionDenied
@@ -80,19 +80,6 @@ def answer_survey(request, eid, sid):
     questions = get_answered_questions(survey=survey, read_only=False)
 
     if request.method == 'POST':
-        # req = request.POST
-        # if 'assignee' in req:
-        #     user_id = req['assignee']
-        #     user = User.objects.get(id=int(req['assignee']))
-        #     survey.assignee = user
-        #     survey.save()
-        #     form = AssignUserForm(instance=survey)
-        #     message_string = 'Successfully assigned ' + user.username
-        #     messages.add_message(request,
-        #                          messages.SUCCESS,
-        #                          message_string,
-        #                          extra_tags='alert-success')
-        #     return HttpResponseRedirect(reverse('view_engagement', args=(engagement.id,)))
         questions = [
             q.get_form()(request.POST or None,
                          prefix=str(q.id),
