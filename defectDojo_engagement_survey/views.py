@@ -76,9 +76,9 @@ def answer_survey(request, eid, sid):
         auth = request.user.is_staff or request.user in prod.authorized_users.all()
         if not auth:
             messages.add_message(request,
-                                 messages.FAILURE,
+                                 messages.ERROR,
                                  'You must be logged in to answer survey. Otherwise, enable anonymous response in system settings.',
-                                 extra_tags='alert-failure')
+                                 extra_tags='alert-danger')
             # will render 403
             raise PermissionDenied
 
