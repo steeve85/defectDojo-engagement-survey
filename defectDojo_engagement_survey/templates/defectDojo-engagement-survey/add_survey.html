@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h3>Add Survey to {{engagement}}</h3>
+{% if engagement %}
+	<h3>Add Survey to {{engagement}}</h3>
+{% else %}
+	<h3>Add Survey to New Engagement</h3>
+{% endif %}
 {% if surveys %}
 	<form class="form-horizontal" method="post">{% csrf_token %}
 	{% include "dojo/form_fields.html" with form=form %}

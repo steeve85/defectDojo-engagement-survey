@@ -230,6 +230,7 @@ def add_empty_survey(request):
     user = request.user
     surveys = Engagement_Survey.objects.all()
     form = Add_Survey_Form()
+    engagement = None
     if request.method == 'POST':
         form = Add_Survey_Form(request.POST)
         if form.is_valid():
@@ -256,7 +257,7 @@ def add_empty_survey(request):
                   {'surveys': surveys,
                    'user': user,
                    'form': form,
-                   'engagement': survey.engagement})
+                   'engagement': engagement})
 
 
 @user_passes_test(lambda u: u.is_staff)
