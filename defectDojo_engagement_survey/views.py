@@ -600,36 +600,44 @@ def add_empty_survey(request):
 
 @user_passes_test(lambda u: u.is_staff)
 def delete_empty_survey(request, esid):
-    survey = get_object_or_404(Engagement_Survey, id=esid)
-    form = Delete_Eng_Survey_Form(instance=survey)
+    engagement = None
+    survey = get_object_or_404(Answered_Survey, id=esid)
 
-    from django.contrib.admin.utils import NestedObjects
-    from django.db import DEFAULT_DB_ALIAS
+    questions = get_answered_questions(survey=survey, read_only=True)
 
-    collector = NestedObjects(using=DEFAULT_DB_ALIAS)
-    collector.collect([survey])
-    rels = collector.nested()
+    form = Delete_Survey_Form(instance=survey)
 
     if request.method == 'POST':
-        if 'id' in request.POST and str(survey.id) == request.POST['id']:
-            form = Delete_Eng_Survey_Form(request.POST, instance=survey)
-            if form.is_valid():
-                survey.delete()
-                messages.add_message(request,
-                                     messages.SUCCESS,
-                                     'Survey and relationships removed.',
-                                     extra_tags='alert-success')
-                return HttpResponseRedirect(reverse('survey'))
-    add_breadcrumb(title="Delete Survey", top_level=False, request=request)
+        form = Delete_Survey_Form(request.POST, instance=survey)
+        if form.is_valid():
+            answers = Answer.objects.filter(
+                question__in=[
+                    question.id for question in survey.survey.questions.all()],
+                answered_survey=survey)
+            for answer in answers:
+                answer.delete()
+            survey.delete()
+            messages.add_message(request,
+                                 messages.SUCCESS,
+                                 'Survey deleted successfully.',
+                                 extra_tags='alert-success')
+            return HttpResponseRedirect('/survey')
+        else:
+            messages.add_message(request,
+                                 messages.ERROR,
+                                 'Unable to delete survey.',
+                                 extra_tags='alert-danger')
+    add_breadcrumb(title="Delete " + survey.survey.name + " Survey", top_level=False, request=request)
     return render(request, 'defectDojo-engagement-survey/delete_survey.html',
                   {'survey': survey,
                    'form': form,
-                   'rels': rels,
+                   'engagement': engagement,
+                   'questions': questions,
                    })
 
-    
-def answer_empty_survey(request, eid, sid):
-    survey = get_object_or_404(Answered_Survey, id=sid)
+
+def answer_empty_survey(request, esid):
+    survey = get_object_or_404(Answered_Survey, id=esid)
     settings = System_Settings.objects.all()[0]
 
     if not settings.allow_anonymous_survey_repsonse:
