@@ -226,7 +226,7 @@ def add_survey(request, eid):
 
 
 @user_passes_test(lambda u: u.is_staff)
-def add_empty_survey(request, eid):
+def add_empty_survey(request):
     user = request.user
     surveys = Engagement_Survey.objects.all()
     form = Add_Survey_Form()
