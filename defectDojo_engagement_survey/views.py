@@ -14,8 +14,6 @@ from django.urls import reverse
 from django.http.response import HttpResponseRedirect, HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404
 from django.utils.html import escape
-from django.utils import timezone as tz
-from datetime import timedelta
 from pytz import timezone
 
 from defectDojo_engagement_survey.filters import SurveyFilter, QuestionFilter
@@ -24,8 +22,7 @@ from dojo.models import Engagement, System_Settings
 from dojo.utils import add_breadcrumb, get_page_items
 from .forms import Add_Survey_Form, Delete_Survey_Form, CreateSurveyForm, Delete_Eng_Survey_Form, \
     EditSurveyQuestionsForm, CreateQuestionForm, CreateTextQuestionForm, AssignUserForm, \
-    CreateChoiceQuestionForm, EditTextQuestionForm, EditChoiceQuestionForm, AddChoicesForm, \
-    EmptySurveyForm
+    CreateChoiceQuestionForm, EditTextQuestionForm, EditChoiceQuestionForm, AddChoicesForm
 from .models import Answered_Survey, Engagement_Survey, Answer, TextQuestion, ChoiceQuestion, Choice
 
 localtz = timezone('America/Chicago')
@@ -232,18 +229,12 @@ def add_survey(request, eid):
 def add_empty_survey(request):
     user = request.user
     surveys = Engagement_Survey.objects.all()
-    form = EmptySurveyForm()
+    form = Add_Survey_Form()
     engagement = None
     if request.method == 'POST':
-        form = EmptySurveyForm(request.POST)
+        form = Add_Survey_Form(request.POST)
         if form.is_valid():
-            engagement = Engagement(name="User Entry",
-                                    target_start=tz.now().date(),
-                                    target_end=tz.now().date() + timedelta(days=7),
-                                    product_id=form.cleaned_data.get('product').id)
-            engagement.save()
             survey = form.save(commit=False)
-            survey.engagement = engagement
             survey.save()
             messages.add_message(request,
                                  messages.SUCCESS,
