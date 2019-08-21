@@ -43,7 +43,7 @@ urlpatterns = [
     url(r'^engagement/(?P<eid>\d+)/add_survey$',
         views.add_survey,
         name='add_survey'),
-    url(r'^/empty_survey$',
+    url(r'^empty_survey$',
         views.add_empty_survey,
         name='add_empty_survey'),
     url(r'^engagement/(?P<eid>\d+)/survey/(?P<sid>\d+)/answer',
