@@ -256,7 +256,7 @@ def add_empty_survey(request):
                   {'surveys': surveys,
                    'user': user,
                    'form': form,
-                   'engagement': engagement})
+                   'engagement': survey.engagement})
 
 
 @user_passes_test(lambda u: u.is_staff)
