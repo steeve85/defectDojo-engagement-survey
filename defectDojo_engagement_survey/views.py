@@ -14,6 +14,7 @@ from django.urls import reverse
 from django.http.response import HttpResponseRedirect, HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404
 from django.utils.html import escape
+from django.utils import timezone as tz
 from pytz import timezone
 
 from defectDojo_engagement_survey.filters import SurveyFilter, QuestionFilter
@@ -235,7 +236,7 @@ def add_empty_survey(request):
         form = Add_Survey_Form(request.POST)
         if form.is_valid():
             engagement = Engagement(name="User Entry",
-                                    target_start=timezone.now())
+                                    target_start=tz.now())
             engagement.save()
             survey = form.save(commit=False)
             survey.engagement = engagement
