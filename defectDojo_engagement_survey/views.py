@@ -15,6 +15,7 @@ from django.http.response import HttpResponseRedirect, HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404
 from django.utils.html import escape
 from django.utils import timezone as tz
+from datetime import timedelta
 from pytz import timezone
 
 from defectDojo_engagement_survey.filters import SurveyFilter, QuestionFilter
