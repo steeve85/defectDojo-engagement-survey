@@ -80,19 +80,19 @@ def answer_survey(request, eid, sid):
     questions = get_answered_questions(survey=survey, read_only=False)
 
     if request.method == 'POST':
-        req = request.POST
-        if 'assignee' in req:
-            user_id = req['assignee']
-            user = User.objects.get(id=int(req['assignee']))
-            survey.assignee = user
-            survey.save()
-            form = AssignUserForm(instance=survey)
-            message_string = 'Successfully assigned ' + user.username
-            messages.add_message(request,
-                                 messages.SUCCESS,
-                                 message_string,
-                                 extra_tags='alert-success')
-            return HttpResponseRedirect(reverse('view_engagement', args=(engagement.id,)))
+        # req = request.POST
+        # if 'assignee' in req:
+        #     user_id = req['assignee']
+        #     user = User.objects.get(id=int(req['assignee']))
+        #     survey.assignee = user
+        #     survey.save()
+        #     form = AssignUserForm(instance=survey)
+        #     message_string = 'Successfully assigned ' + user.username
+        #     messages.add_message(request,
+        #                          messages.SUCCESS,
+        #                          message_string,
+        #                          extra_tags='alert-success')
+        #     return HttpResponseRedirect(reverse('view_engagement', args=(engagement.id,)))
         questions = [
             q.get_form()(request.POST or None,
                          prefix=str(q.id),
