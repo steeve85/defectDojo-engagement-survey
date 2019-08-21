@@ -638,7 +638,7 @@ def delete_empty_survey(request, esid):
 
 def answer_empty_survey(request, esid):
     survey = get_object_or_404(Answered_Survey, id=esid)
-    enagement = None
+    engagement = None
     settings = System_Settings.objects.all()[0]
 
     if not settings.allow_anonymous_survey_repsonse:
