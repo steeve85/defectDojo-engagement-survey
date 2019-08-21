@@ -241,10 +241,9 @@ def add_empty_survey(request):
                                  'Engagement Created, Survey successfully added, answers pending.',
                                  extra_tags='alert-success')
             if 'respond_survey' in request.POST:
-                return HttpResponseRedirect(
-                    '/engagement/%s/survey/%s/answer' % (survey.engagement.id, survey.id))
+                return HttpResponseRedirect('/dashboard')
 
-            return HttpResponseRedirect('/engagement/%s' % (survey.engagement.id))
+            return HttpResponseRedirect('/survey')
         else:
             messages.add_message(request,
                                  messages.ERROR,
