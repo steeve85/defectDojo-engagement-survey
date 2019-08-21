@@ -72,6 +72,7 @@ def answer_survey(request, eid, sid):
     prod = engagement.product
 
     auth = request.user.is_staff or request.user in prod.authorized_users.all()
+
     if not auth:
         # will render 403
         raise PermissionDenied
@@ -152,7 +153,7 @@ def assign_survey(request, eid, sid):
             user = form.cleaned_data['assignee']
             survey.assignee = user
             survey.save()
-            return HttpResponseRedirect(reverse('view_engagement', args=(engagement.id,)))
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
     add_breadcrumb(title="Assign Survey", top_level=False, request=request)
     return render(request,
                   'defectDojo-engagement-survey/assign_survey.html',
