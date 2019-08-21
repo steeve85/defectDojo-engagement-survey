@@ -237,7 +237,7 @@ def add_empty_survey(request):
         if form.is_valid():
             engagement = Engagement(name="User Entry",
                                     target_start=tz.now().date(),
-                                    target_end=timezone.now().date() + timedelta(days=7))
+                                    target_end=tz.now().date() + timedelta(days=7))
             engagement.save()
             survey = form.save(commit=False)
             survey.engagement = engagement
