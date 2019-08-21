@@ -234,8 +234,10 @@ def add_empty_survey(request):
     if request.method == 'POST':
         form = Add_Survey_Form(request.POST)
         if form.is_valid():
+            engagement = Engagement(name="User Entry")
+            engagement.save()
             survey = form.save(commit=False)
-            survey.engagement = Engagement(name="User Entry")
+            survey.engagement = engagement
             survey.save()
             messages.add_message(request,
                                  messages.SUCCESS,
