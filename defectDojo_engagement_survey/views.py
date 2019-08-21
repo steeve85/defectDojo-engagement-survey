@@ -231,14 +231,15 @@ def add_survey(request, eid):
 def add_empty_survey(request):
     user = request.user
     surveys = Engagement_Survey.objects.all()
-    form = Add_Survey_Form()
+    form = EmptySurveyForm()
     engagement = None
     if request.method == 'POST':
-        form = Add_Survey_Form(request.POST)
+        form = EmptySurveyForm(request.POST)
         if form.is_valid():
             engagement = Engagement(name="User Entry",
                                     target_start=tz.now().date(),
-                                    target_end=tz.now().date() + timedelta(days=7))
+                                    target_end=tz.now().date() + timedelta(days=7),
+                                    product_id=form.cleaned_data.get('product').id)
             engagement.save()
             survey = form.save(commit=False)
             survey.engagement = engagement
