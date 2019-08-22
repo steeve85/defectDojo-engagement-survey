@@ -599,6 +599,22 @@ def add_empty_survey(request):
 
 
 @user_passes_test(lambda u: u.is_staff)
+def view_empty_survey(request, eid, sid):
+    survey = get_object_or_404(Answered_Survey, id=sid)
+    engagement = None
+
+    questions = get_answered_questions(survey=survey, read_only=True)
+    add_breadcrumb(title=survey.survey.name + " Survey Responses", top_level=False, request=request)
+    return render(request, 'defectDojo-engagement-survey/view_survey.html',
+                  {'survey': survey,
+                   'user': request.user,
+                   'engagement': engagement,
+                   'questions': questions,
+                   'name': survey.survey.name + " Survey Responses"
+                   })
+
+
+@user_passes_test(lambda u: u.is_staff)
 def delete_empty_survey(request, esid):
     engagement = None
     survey = get_object_or_404(Answered_Survey, id=esid)
