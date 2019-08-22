@@ -753,5 +753,4 @@ def engagement_empty_survey(request, esid):
                                  extra_tags='alert-danger')
     add_breadcrumb(title="Add Empty Survey", top_level=False, request=request)
     return render(request, 'defectDojo-engagement-survey/add_engagement.html',
-                  {'user': user,
-                   'form': form})
+                  {'form': form})
