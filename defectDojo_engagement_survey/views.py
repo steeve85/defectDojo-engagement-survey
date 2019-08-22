@@ -751,9 +751,7 @@ def engagement_empty_survey(request, esid):
                                  messages.ERROR,
                                  'Survey could not be added.',
                                  extra_tags='alert-danger')
-    form.fields["survey"].queryset = surveys
     add_breadcrumb(title="Add Empty Survey", top_level=False, request=request)
     return render(request, 'defectDojo-engagement-survey/add_engagement.html',
-                  {'surveys': surveys,
-                   'user': user,
+                  {'user': user,
                    'form': form})
