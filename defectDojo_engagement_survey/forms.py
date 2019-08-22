@@ -364,7 +364,7 @@ class AssignUserForm(forms.ModelForm):
         exclude = ['engagement', 'survey', 'responder', 'completed', 'answered_on']
 
 
-class AddEngagementForm(forms.ModelForm):
+class AddEngagementForm(forms.Forms):
     product = forms.ModelChoiceField(
         queryset=Product.objects.all(),
         required=True,
