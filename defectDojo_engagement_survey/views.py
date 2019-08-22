@@ -719,7 +719,7 @@ def engagement_empty_survey(request, esid):
     survey = get_object_or_404(Answered_Survey, id=esid)
     engagement = None
     settings = System_Settings.objects.all()[0]
-    form = AddEngagementForm(instance=survey)
+    form = AddEngagementForm()
 
     if not settings.allow_anonymous_survey_repsonse:
         auth = request.user.is_staff
