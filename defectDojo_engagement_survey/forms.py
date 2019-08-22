@@ -370,12 +370,3 @@ class AddEngagementForm(forms.ModelForm):
         required=True,
         widget=forms.widgets.Select(),
         help_text='Select which product to attach Engagment')
-
-    class Meta:
-        model = Answered_Survey
-        exclude = ('responder',
-                   'completed',
-                   'engagement',
-                   'answered_on',
-                   'assignee',
-                   'survey')
