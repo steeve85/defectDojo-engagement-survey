@@ -60,7 +60,7 @@ urlpatterns = [
     url(r'^empty_survey$',
         views.add_empty_survey,
         name='add_empty_survey'),
-    url(r'^empty_survey/(?P<sid>\d+)$',
+    url(r'^empty_survey/(?P<esid>\d+)$',
         views.view_empty_survey,
         name='view_empty_survey'),
     url(r'^empty_survey/(?P<esid>\d+)/delete$',

@@ -384,7 +384,7 @@ def survey(request):
     surveys = Engagement_Survey.objects.all()
     surveys = SurveyFilter(request.GET, queryset=surveys)
     paged_surveys = get_page_items(request, surveys.qs, 25)
-    empty_surveys = Answered_Survey.objects.all().filter(engagement__isnull=True)
+    empty_surveys = Answered_Survey.objects.all().filter(engagement__isnull=True, completed=0)
     add_breadcrumb(title="All Surveys", top_level=True, request=request)
     return render(request, 'defectDojo-engagement-survey/list_surveys.html',
                   {"surveys": paged_surveys,
@@ -599,8 +599,8 @@ def add_empty_survey(request):
 
 
 @user_passes_test(lambda u: u.is_staff)
-def view_empty_survey(request, eid, sid):
-    survey = get_object_or_404(Answered_Survey, id=sid)
+def view_empty_survey(request, esid):
+    survey = get_object_or_404(Answered_Survey, id=esid)
     engagement = None
 
     questions = get_answered_questions(survey=survey, read_only=True)
