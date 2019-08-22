@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+	<h3>Link Survey to New Engagement</h3>
+	<form class="form-horizontal" method="post">
+		{% csrf_token %}
+		{% include "dojo/form_fields.html" with form=form %}
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<input class="btn btn-primary" type="submit" name="add_survey" value="Add Survey" /> <input class="btn btn-primary" type="submit" name="respond_survey" value="Add Survey and Respond" />
+			</div>
+		</div>
+	</form>
+{% endblock %}

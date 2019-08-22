@@ -15,6 +15,8 @@ from django.http.response import HttpResponseRedirect, HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404
 from django.utils.html import escape
 from pytz import timezone
+from datetime import timedelta
+from django.utils import timezone as tz
 
 from defectDojo_engagement_survey.filters import SurveyFilter, QuestionFilter
 from defectDojo_engagement_survey.models import Question
@@ -22,7 +24,8 @@ from dojo.models import Engagement, System_Settings
 from dojo.utils import add_breadcrumb, get_page_items
 from .forms import Add_Survey_Form, Delete_Survey_Form, CreateSurveyForm, Delete_Eng_Survey_Form, \
     EditSurveyQuestionsForm, CreateQuestionForm, CreateTextQuestionForm, AssignUserForm, \
-    CreateChoiceQuestionForm, EditTextQuestionForm, EditChoiceQuestionForm, AddChoicesForm
+    CreateChoiceQuestionForm, EditTextQuestionForm, EditChoiceQuestionForm, AddChoicesForm, \
+    AddEngagementForm
 from .models import Answered_Survey, Engagement_Survey, Answer, TextQuestion, ChoiceQuestion, Choice
 
 localtz = timezone('America/Chicago')
@@ -710,3 +713,47 @@ def answer_empty_survey(request, esid):
                    'engagement': engagement,
                    'questions': questions,
                    })
+
+
+def engagement_empty_survey(request, esid):
+    survey = get_object_or_404(Answered_Survey, id=esid)
+    engagement = None
+    settings = System_Settings.objects.all()[0]
+    form = AddEngagementForm(instance=survey)
+
+    if not settings.allow_anonymous_survey_repsonse:
+        auth = request.user.is_staff
+        if not auth:
+            messages.add_message(request,
+                                 messages.ERROR,
+                                 'You must be logged in to answer survey. Otherwise, enable anonymous response in system settings.',
+                                 extra_tags='alert-danger')
+            # will render 403
+            raise PermissionDenied
+
+    if request.method == 'POST':
+        form = AddEngagementForm(request.POST)
+        if form.is_valid():
+            product = form.save(commit=False)
+            engagement = Engagement(product_id=product.id,
+                                    target_start=tz.now(),
+                                    target_end=tz.now + timedelta(days(7)))
+            engagement.save()
+            survey.engagement = engagement
+            survey.save()
+            messages.add_message(request,
+                                 messages.SUCCESS,
+                                 'Engagement created and survey successfully linked.',
+                                 extra_tags='alert-success')
+            return HttpResponseRedirect('/engagement/%s/edit' % engagement.id)
+        else:
+            messages.add_message(request,
+                                 messages.ERROR,
+                                 'Survey could not be added.',
+                                 extra_tags='alert-danger')
+    form.fields["survey"].queryset = surveys
+    add_breadcrumb(title="Add Empty Survey", top_level=False, request=request)
+    return render(request, 'defectDojo-engagement-survey/add_engagement.html',
+                  {'surveys': surveys,
+                   'user': user,
+                   'form': form})

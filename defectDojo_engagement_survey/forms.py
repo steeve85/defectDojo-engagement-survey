@@ -364,18 +364,12 @@ class AssignUserForm(forms.ModelForm):
         exclude = ['engagement', 'survey', 'responder', 'completed', 'answered_on']
 
 
-class EmptySurveyForm(forms.ModelForm):
-    survey = forms.ModelChoiceField(
-        queryset=Engagement_Survey.objects.all(),
-        required=True,
-        widget=forms.widgets.Select(),
-        help_text='Select the Survey to add.')
-
+class AddEngagementForm(forms.ModelForm):
     product = forms.ModelChoiceField(
         queryset=Product.objects.all(),
         required=True,
         widget=forms.widgets.Select(),
-        help_text='Select which produc to attach Engagment')
+        help_text='Select which product to attach Engagment')
 
     class Meta:
         model = Answered_Survey
@@ -383,4 +377,5 @@ class EmptySurveyForm(forms.ModelForm):
                    'completed',
                    'engagement',
                    'answered_on',
-                   'assignee')
+                   'assignee',
+                   'survey')

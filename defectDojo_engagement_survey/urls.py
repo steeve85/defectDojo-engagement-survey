@@ -69,4 +69,7 @@ urlpatterns = [
     url(r'^empty_survey/(?P<esid>\d+)/answer$',
         views.answer_empty_survey,
         name='answer_empty_survey'),
+    url(r'^empty_survey/(?P<esid>\d+)/new_engagement$',
+        views.engagement_empty_survey,
+        name='engagement_empty_survey'),
 ]
