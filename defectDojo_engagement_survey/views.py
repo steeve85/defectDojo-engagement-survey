@@ -736,8 +736,8 @@ def engagement_empty_survey(request, esid):
         if form.is_valid():
             product = form.save(commit=False)
             engagement = Engagement(product_id=product.id,
-                                    target_start=tz.now(),
-                                    target_end=tz.now + timedelta(days(7)))
+                                    target_start=tz.now().date(),
+                                    target_end=tz.now().date() + timedelta(days=7))
             engagement.save()
             survey.engagement = engagement
             survey.save()
