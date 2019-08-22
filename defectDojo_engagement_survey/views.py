@@ -734,7 +734,7 @@ def engagement_empty_survey(request, esid):
     if request.method == 'POST':
         form = AddEngagementForm(request.POST)
         if form.is_valid():
-            product = form.save(commit=False)
+            product = form.cleaned_data.get('product')
             engagement = Engagement(product_id=product.id,
                                     target_start=tz.now().date(),
                                     target_end=tz.now().date() + timedelta(days=7))
