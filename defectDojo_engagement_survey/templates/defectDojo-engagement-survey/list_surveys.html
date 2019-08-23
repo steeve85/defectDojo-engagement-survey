@@ -29,32 +29,8 @@
             {% else %}
                 No surveys found.
             {% endif %}
-        </div>
+        
 
-        <div class="col-md-2">
-            <div class="panel panel-default filters">
-                {% if filtered.form %}
-                    {% if request.user.is_staff %}
-                        <div class="panel-heading">Actions</div>
-                        <div class="panel-body centered">
-                            <a class="btn btn-sm btn-primary" href="{% url 'create_survey' %}">
-                                Create Survey
-                            </a>
-                        </div>
-                    {% endif %}
-                    <div class="panel-heading">Filters</div>
-                    <form method="get" class="panel-body">
-                        {{ filtered.form.as_p }}
-                        <div class="centered">
-                            <input type="submit" class="btn btn-primary inline top" value="Apply"/><br/><br/>
-                            <a href="{% url 'survey' %}"> [Clear Filters] </a>
-                        </div>
-                    </form>
-                {% endif %}
-            </div>
-        </div>
-
-        <div class="col-md-10">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Unanswered Empty Engagement Surveys
@@ -112,6 +88,33 @@
                     {% endif %}
                 </div>
             </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="panel panel-default filters">
+                {% if filtered.form %}
+                    {% if request.user.is_staff %}
+                        <div class="panel-heading">Actions</div>
+                        <div class="panel-body centered">
+                            <a class="btn btn-sm btn-primary" href="{% url 'create_survey' %}">
+                                Create Survey
+                            </a>
+                        </div>
+                    {% endif %}
+                    <div class="panel-heading">Filters</div>
+                    <form method="get" class="panel-body">
+                        {{ filtered.form.as_p }}
+                        <div class="centered">
+                            <input type="submit" class="btn btn-primary inline top" value="Apply"/><br/><br/>
+                            <a href="{% url 'survey' %}"> [Clear Filters] </a>
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-md-10">
+            
         </div> 
     </div>
 
