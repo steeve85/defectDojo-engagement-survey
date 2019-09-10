@@ -142,7 +142,7 @@ class Answered_Survey(models.Model):
 
 class General_Survey(models.Model):
     survey = models.ForeignKey(Engagement_Survey, on_delete=models.CASCADE)
-    num_repsonses = models.IntegerField(default=0)
+    num_responses = models.IntegerField(default=0)
     generated = models.DateField(null=False)
     expiration = models.DateField(null=False, blank=False)
 
