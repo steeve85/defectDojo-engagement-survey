@@ -387,7 +387,11 @@ def survey(request):
     surveys = Engagement_Survey.objects.all()
     surveys = SurveyFilter(request.GET, queryset=surveys)
     paged_surveys = get_page_items(request, surveys.qs, 25)
-    general_surveys = General_Survey.objects.all().filter(engagement__isnull=True, completed=0)
+    general_surveys = General_Survey.objects.all()
+    for survey in general_surveys:
+        if survey.expiration < tz.now():
+            survey.delete()
+
     add_breadcrumb(title="All Surveys", top_level=True, request=request)
     return render(request, 'defectDojo-engagement-survey/list_surveys.html',
                   {"surveys": paged_surveys,
