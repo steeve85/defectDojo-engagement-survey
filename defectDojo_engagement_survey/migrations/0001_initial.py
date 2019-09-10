@@ -97,7 +97,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('num_responses', models.IntegerField(default=0)),
-                ('generated', models.DateTimeField(null=False)),
+                ('generated', models.DateTimeField(auto_now_add=True, null=True)),
                 ('expiration', models.DateTimeField(null=False, blank=False)),
             ],
             options={
