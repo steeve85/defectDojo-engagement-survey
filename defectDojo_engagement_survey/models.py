@@ -143,8 +143,8 @@ class Answered_Survey(models.Model):
 class General_Survey(models.Model):
     survey = models.ForeignKey(Engagement_Survey, on_delete=models.CASCADE)
     num_responses = models.IntegerField(default=0)
-    generated = models.DateField(null=False)
-    expiration = models.DateField(null=False, blank=False)
+    generated = models.DateTimeField(null=False)
+    expiration = models.DateTimeField(null=False, blank=False)
 
     class Meta:
         verbose_name = "General Engagement Survey"

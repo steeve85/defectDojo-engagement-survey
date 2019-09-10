@@ -97,8 +97,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('num_responses', models.IntegerField(default=0)),
-                ('generated', models.DateField(null=False)),
-                ('expiration', models.DateField(null=False, blank=False)),
+                ('generated', models.DateTimeField(null=False)),
+                ('expiration', models.DateTimeField(null=False, blank=False)),
             ],
             options={
                 'verbose_name': 'General Engagement Survey',
