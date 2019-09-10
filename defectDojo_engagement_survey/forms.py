@@ -213,11 +213,7 @@ class AddGeneralSurveyForm(forms.ModelForm):
 
     class Meta:
         model = General_Survey
-        exclude = ('responder',
-                   'completed',
-                   'engagement',
-                   'answered_on',
-                   'assignee')
+        exclude = ('num_repsonses', 'generated')
 
 
 class Delete_Survey_Form(forms.ModelForm):
