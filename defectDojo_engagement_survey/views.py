@@ -389,7 +389,7 @@ def survey(request):
     paged_surveys = get_page_items(request, surveys.qs, 25)
     general_surveys = General_Survey.objects.all()
     for survey in general_surveys:
-        if survey.expiration < tz.now():
+        if survey.expiration < tz.now().date:
             survey.delete()
 
     add_breadcrumb(title="All Surveys", top_level=True, request=request)
@@ -582,7 +582,8 @@ def add_empty_survey(request):
         form = AddGeneralSurveyForm(request.POST)
         if form.is_valid():
             survey = form.save(commit=False)
-            survey.generated = tz.now()
+            survey.generated = tz.now().date()
+            survey.expiration = survey.expiration.date()
             survey.save()
             messages.add_message(request,
                                  messages.SUCCESS,
