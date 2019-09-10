@@ -583,7 +583,7 @@ def add_empty_survey(request):
         if form.is_valid():
             survey = form.save(commit=False)
             survey.generated = tz.now().date()
-            survey.expiration = survey.expiration.date()
+            survey.expiration = survey.expiration
             survey.save()
             messages.add_message(request,
                                  messages.SUCCESS,
