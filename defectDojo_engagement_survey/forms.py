@@ -212,7 +212,7 @@ class AddGeneralSurveyForm(forms.ModelForm):
         help_text='Select the Survey to add.')
 
     class Meta:
-        model = Gen
+        model = General_Survey
         exclude = ('responder',
                    'completed',
                    'engagement',
