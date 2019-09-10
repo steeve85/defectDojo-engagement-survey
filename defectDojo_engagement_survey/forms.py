@@ -210,6 +210,8 @@ class AddGeneralSurveyForm(forms.ModelForm):
         required=True,
         widget=forms.widgets.Select(),
         help_text='Select the Survey to add.')
+    expiration = forms.DateField(widget=forms.TextInput(
+        attrs={'class': 'datepicker', 'autocomplete': 'off'}))
 
     class Meta:
         model = General_Survey
