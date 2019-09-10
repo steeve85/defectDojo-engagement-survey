@@ -140,6 +140,23 @@ class Answered_Survey(models.Model):
         return self.survey.name
 
 
+class General_Survey(models.Model):
+    survey = models.ForeignKey(Engagement_Survey, on_delete=models.CASCADE)
+    num_repsonses = models.IntegerField(default=0)
+    generated = models.DateField(null=False)
+    expiration = models.DateField(null=False, blank=False)
+
+    class Meta:
+        verbose_name = "General Engagement Survey"
+        verbose_name_plural = "General Engagement Surveys"
+
+    def __unicode__(self):
+        return self.survey.name
+
+    def __str__(self):
+        return self.survey.name
+
+
 class Answer(PolymorphicModel, TimeStampedModel):
     ''' Base Answer model
     '''

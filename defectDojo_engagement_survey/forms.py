@@ -13,7 +13,7 @@ from dojo.forms import MultipleSelectWithPop
 from dojo.models import User, Product
 
 from .models import Engagement_Survey, Answered_Survey, TextAnswer, ChoiceAnswer, Choice, Question, TextQuestion, \
-    ChoiceQuestion
+    ChoiceQuestion, General_Survey
 
 
 # List of validator_name:func_name
@@ -197,6 +197,22 @@ class Add_Survey_Form(forms.ModelForm):
 
     class Meta:
         model = Answered_Survey
+        exclude = ('responder',
+                   'completed',
+                   'engagement',
+                   'answered_on',
+                   'assignee')
+
+
+class AddGeneralSurveyForm(forms.ModelForm):
+    survey = forms.ModelChoiceField(
+        queryset=Engagement_Survey.objects.all(),
+        required=True,
+        widget=forms.widgets.Select(),
+        help_text='Select the Survey to add.')
+
+    class Meta:
+        model = Gen
         exclude = ('responder',
                    'completed',
                    'engagement',

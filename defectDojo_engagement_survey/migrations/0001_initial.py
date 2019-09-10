@@ -93,6 +93,19 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
+            name='General_Survey',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (num_repsonses, models.IntegerField(default=0)),
+                (generated, models.DateField(null=False)),
+                (expiration, models.DateField(null=False, blank=False)),
+            ],
+            options={
+                'verbose_name': 'General Engagement Survey',
+                'verbose_name_plural': 'General Engagement Surveys',
+            },
+        ),
+        migrations.CreateModel(
             name='Answer',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -160,6 +173,11 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='answered_survey',
+            name='survey',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Engagement_Survey'),
+        ),
+        migrations.AddField(
+            model_name='general_survey',
             name='survey',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='defectDojo_engagement_survey.Engagement_Survey'),
         ),

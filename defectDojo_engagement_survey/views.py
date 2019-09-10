@@ -25,7 +25,7 @@ from dojo.utils import add_breadcrumb, get_page_items
 from .forms import Add_Survey_Form, Delete_Survey_Form, CreateSurveyForm, Delete_Eng_Survey_Form, \
     EditSurveyQuestionsForm, CreateQuestionForm, CreateTextQuestionForm, AssignUserForm, \
     CreateChoiceQuestionForm, EditTextQuestionForm, EditChoiceQuestionForm, AddChoicesForm, \
-    AddEngagementForm
+    AddEngagementForm, AddGeneralSurveyForm
 from .models import Answered_Survey, Engagement_Survey, Answer, TextQuestion, ChoiceQuestion, Choice
 
 localtz = timezone('America/Chicago')
@@ -572,12 +572,13 @@ def add_choices(request):
 def add_empty_survey(request):
     user = request.user
     surveys = Engagement_Survey.objects.all()
-    form = Add_Survey_Form()
+    form = AddGeneralSurveyForm()
     engagement = None
     if request.method == 'POST':
-        form = Add_Survey_Form(request.POST)
+        form = AddGeneralSurveyForm(request.POST)
         if form.is_valid():
             survey = form.save(commit=False)
+            survey.generated = tz.now()
             survey.save()
             messages.add_message(request,
                                  messages.SUCCESS,
@@ -706,7 +707,7 @@ def answer_empty_survey(request, esid):
                                  messages.ERROR,
                                  'Survey has errors, please correct.',
                                  extra_tags='alert-danger')
-    add_breadcrumb(title="Answer " + survey.survey.name + " Survey", top_level=False, request=request)
+    add_breadcrumb(title="Answer Empty " + survey.survey.name + " Survey", top_level=False, request=request)
     return render(request,
                   'defectDojo-engagement-survey/answer_survey.html',
                   {'survey': survey,
