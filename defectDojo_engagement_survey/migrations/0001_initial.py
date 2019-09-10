@@ -99,6 +99,7 @@ class Migration(migrations.Migration):
                 (num_repsonses, models.IntegerField(default=0)),
                 (generated, models.DateField(null=False)),
                 (expiration, models.DateField(null=False, blank=False)),
+                (num_respsonses, models.IntegerField(deafult=0)),
             ],
             options={
                 'verbose_name': 'General Engagement Survey',
