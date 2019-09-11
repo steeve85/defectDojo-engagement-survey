@@ -393,7 +393,9 @@ def survey(request):
         import sys
         sys.stderr.write('\n\n')
         sys.stderr.write('exp :: ' + str(survey_exp) + '\n')
-        sys.stderr.write('now :: ' + str(tz.now()) + '\n\n')
+        sys.stderr.write('exp type :: ' + str(type(survey_exp)) + "\n")
+        sys.stderr.write('now :: ' + str(tz.now()) + '\n')
+        sys.stderr.write('exp type :: ' + str(type(tz.now())) + '\n')
         if survey.expiration.datetime < tz.now():
             survey.delete()
 
@@ -587,6 +589,7 @@ def add_empty_survey(request):
         form = AddGeneralSurveyForm(request.POST)
         if form.is_valid():
             survey = form.save(commit=False)
+            survey.generated = tz.now()
             survey.save()
             messages.add_message(request,
                                  messages.SUCCESS,
