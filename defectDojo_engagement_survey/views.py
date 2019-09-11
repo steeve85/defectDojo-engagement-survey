@@ -389,7 +389,7 @@ def survey(request):
     paged_surveys = get_page_items(request, surveys.qs, 25)
     general_surveys = General_Survey.objects.all()
     for survey in general_surveys:
-        if survey.expiration.datetime < tz.now().datetime:
+        if survey.expiration < tz.now().datetime:
             survey.delete()
 
     add_breadcrumb(title="All Surveys", top_level=True, request=request)
