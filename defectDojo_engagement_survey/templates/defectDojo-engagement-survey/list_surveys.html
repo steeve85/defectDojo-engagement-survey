@@ -41,6 +41,7 @@
                             <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Number Responses</th>
                                 <th>Generated</th>
                                 <th>Expiration</th>
                                 <th>Actions</th>
@@ -48,9 +49,10 @@
                             </thead>
                             {% for survey in general %}
                                 <tr>
-                                    <td>{{ survey.survey.name }}</td> 
-                                    <td>{{ survey.generated }}</a>
-                                    <td>{{ survey.expiration }}</a> 
+                                    <td>{{ survey.survey.name }}</td>
+                                    <td>{{ survey.num_responses }}</td> 
+                                    <td>{{ survey.generated }}</td>
+                                    <td>{{ survey.expiration }}</td> 
                                     <td>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
