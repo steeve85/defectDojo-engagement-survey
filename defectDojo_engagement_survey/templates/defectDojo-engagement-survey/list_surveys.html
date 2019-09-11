@@ -36,45 +36,28 @@
                     <a title="Add Survey" class="pull-right btn btn-sm btn-primary" href="/empty_survey"><span class="fa fa-plus"></span></a>
                 </div>
                 <div class="panel-body">
-                    {% if empty %}
-                        <table id="empty" class="tablesorter-bootstrap table table-condensed table-striped">
+                    {% if general %}
+                        <table id="general" class="tablesorter-bootstrap table table-condensed table-striped">
                             <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Product</th>
-                                <th>Engagement</th>
-                                <th>Responder</th>
-                                <th>Status</th>
-                                <th>Completion Date</th>
+                                <th>Generated</th>
+                                <th>Expiration</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
-                            {% for survey in empty %}
+                            {% for survey in general %}
                                 <tr>
-                                    <td><a href="/empty_survey/{{ survey.id }}">{{ survey.survey.name }}</a></td> 
-                                    <td><a href="/product/{{ survey.engagement.prod_id }}">{{ survey.engagement.product.name }}</a>
-                                    <td><a href="/engagement/{{ survey.engagement.id }}">{{ survey.engagement.name }}</a> 
-                                    <td>{{ survey.responder }}</td>
-                                    <td>
-                                        {% if survey.completed %}
-                                            <span class="pass_fail Pass">Completed</span>
-                                        {% else %}
-                                            <span class="pass_fail">Unanswered</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>{{ survey.answered_on }}</td>
+                                    <td>{{ survey.survey.name }}</td> 
+                                    <td>{{ survey.generated }}</a>
+                                    <td>{{ survey.expiration }}</a> 
                                     <td>
                                         <div class="btn-group">
-                                            <a class="btn btn-sm btn-success"
-                                            href="/empty_survey/{{ survey.id }}/answer"> Answer</a>
                                             <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                                     data-target="#shareSurveyModal"
                                                     data-whatever="/empty_survey/{{ survey.id }}/answer">
                                                 <i class="fa fa-share-alt"></i> Share Survey
                                             </button>
-                                            <a class="btn btn-sm btn-danger"
-                                            href="empty_survey/{{ survey.id }}/delete"> Delete
-                                                Survey </a>
                                         </div>
                                     </td>
                                 </tr>
