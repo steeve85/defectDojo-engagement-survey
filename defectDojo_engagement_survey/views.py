@@ -389,6 +389,11 @@ def survey(request):
     paged_surveys = get_page_items(request, surveys.qs, 25)
     general_surveys = General_Survey.objects.all()
     for survey in general_surveys:
+        survey_exp = survey.expiration
+        import sys
+        sys.stderr.write('\n\n')
+        sys.stderr.write('exp :: ' + str(survey_exp) + '\n')
+        sys.stderr.write('now :: ' + str(tz.now()) + '\n\n')
         if survey.expiration.datetime < tz.now():
             survey.delete()
 
