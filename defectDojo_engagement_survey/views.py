@@ -681,8 +681,10 @@ def answer_empty_survey(request, esid):
                                  extra_tags='alert-danger')
             # will render 403
             raise PermissionDenied
+
     survey = Answered_Survey(survey=engagement_survey)
     questions = get_answered_questions(survey=survey, read_only=False)
+    survey.save()
 
     if request.method == 'POST':
         questions = [
