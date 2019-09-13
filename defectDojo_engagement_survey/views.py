@@ -668,7 +668,8 @@ def delete_empty_survey(request, esid):
 
 
 def answer_empty_survey(request, esid):
-    engagement_survey = get_object_or_404(Engagement_Survey, id=esid)
+    general_survey = get_object_or_404(General_Survey, id=esid)
+    engagement_survey = get_object_or_404(Engagement_Survey, id=general_survey.survey_id)
     engagement = None
     settings = System_Settings.objects.all()[0]
 
@@ -682,15 +683,15 @@ def answer_empty_survey(request, esid):
             # will render 403
             raise PermissionDenied
 
-    survey = Answered_Survey(survey=engagement_survey)
-    questions = get_answered_questions(survey=survey, read_only=False)
-    survey.save()
+    # survey = Answered_Survey(survey=engagement_survey)
+    questions = get_answered_questions(survey=engagement_survey, read_only=False)
+    # survey.save()
 
     if request.method == 'POST':
         questions = [
             q.get_form()(request.POST or None,
                          prefix=str(q.id),
-                         answered_survey=survey,
+                         answered_survey=engagement_survey,
                          question=q, form_tag=False)
             for q in survey.survey.questions.all()
                     ]
@@ -705,12 +706,12 @@ def answer_empty_survey(request, esid):
 
         questions_are_valid = all(questions_are_valid)
         if questions_are_valid:
-            req = request.POST
-            raise Exception()
             survey.completed = True
             survey.responder = request.user
             survey.answered_on = date.today()
             survey.save()
+            general_survey.num_responses = general_survey.num_responses + 1
+            generl_sruvey.save()
             messages.add_message(request,
                                  messages.SUCCESS,
                                  'Successfully answered, all answers valid.',
