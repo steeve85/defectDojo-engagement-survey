@@ -162,7 +162,7 @@ def view_survey(request, eid, sid):
     survey = get_object_or_404(Answered_Survey, id=sid)
     engagement = get_object_or_404(Engagement, id=eid)
 
-    questions = get_answered_questions(survey=survey, read_only=True)
+    questions = get_answered_questions(survey=survey, answered=True, read_only=True)
     add_breadcrumb(title=survey.survey.name + " Survey Responses", top_level=False, request=request)
     return render(request, 'defectDojo-engagement-survey/view_survey.html',
                   {'survey': survey,
@@ -173,15 +173,22 @@ def view_survey(request, eid, sid):
                    })
 
 
-def get_answered_questions(survey=None, read_only=False):
+def get_answered_questions(survey=None, answered=True, read_only=False):
     if survey is None:
         return None
 
-    questions = [q.get_form()(prefix=str(q.id),
-                              answered_survey=survey,
-                              question=q, form_tag=False)
-                 for q in survey.survey.questions.all()
-                 ]
+    if answered:
+        questions = [q.get_form()(prefix=str(q.id),
+                                answered_survey=survey,
+                                question=q, form_tag=False)
+                    for q in survey.survey.questions.all()
+                    ]
+    else:
+        questions = [q.get_form()(prefix=str(q.id),
+                                answered_survey=survey,
+                                question=q, form_tag=False)
+                    for q in survey.questions.all()
+                    ]
     if read_only:
         for question in questions:
             question.fields['answer'].widget.attrs = {"readonly": "readonly",
@@ -618,7 +625,7 @@ def view_empty_survey(request, esid):
     survey = get_object_or_404(Answered_Survey, id=esid)
     engagement = None
 
-    questions = get_answered_questions(survey=survey, read_only=True)
+    questions = get_answered_questions(survey=survey, answered=True, read_only=True)
     add_breadcrumb(title=survey.survey.name + " Survey Responses", top_level=False, request=request)
     return render(request, 'defectDojo-engagement-survey/view_survey.html',
                   {'survey': survey,
@@ -634,7 +641,7 @@ def delete_empty_survey(request, esid):
     engagement = None
     survey = get_object_or_404(Answered_Survey, id=esid)
 
-    questions = get_answered_questions(survey=survey, read_only=True)
+    questions = get_answered_questions(survey=survey, answered=True, read_only=True)
 
     form = Delete_Survey_Form(instance=survey)
 
@@ -684,7 +691,7 @@ def answer_empty_survey(request, esid):
             raise PermissionDenied
 
     # survey = Answered_Survey(survey=engagement_survey)
-    questions = get_answered_questions(survey=engagement_survey, read_only=False)
+    questions = get_answered_questions(survey=engagement_survey, answered=False, read_only=False)
     # survey.save()
 
     if request.method == 'POST':
