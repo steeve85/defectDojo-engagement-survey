@@ -705,6 +705,7 @@ def answer_empty_survey(request, esid):
 
         questions_are_valid = all(questions_are_valid)
         if questions_are_valid:
+            raise Exception()
             survey.completed = True
             survey.responder = request.user
             survey.answered_on = date.today()
