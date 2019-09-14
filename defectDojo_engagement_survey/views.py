@@ -688,6 +688,7 @@ def answer_empty_survey(request, esid):
                  for q in engagement_survey.questions.all()
                  ]
     # survey.save()
+    raise Exception()
 
     if request.method == 'POST':
         questions = [
