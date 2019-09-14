@@ -684,7 +684,9 @@ def answer_empty_survey(request, esid):
             raise PermissionDenied
 
     # survey = Answered_Survey(survey=engagement_survey)
-    questions = engagement_survey.questions.all()
+    questions = [q
+                 for q in survey.survey.questions.all()
+                 ]
     # survey.save()
 
     if request.method == 'POST':
