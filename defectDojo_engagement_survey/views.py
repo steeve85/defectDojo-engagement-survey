@@ -671,10 +671,11 @@ def answer_empty_survey(request, esid):
     general_survey = get_object_or_404(General_Survey, id=esid)
     engagement_survey = get_object_or_404(Engagement_Survey, id=general_survey.survey_id)
     engagement = None
+    
     settings = System_Settings.objects.all()[0]
 
     if not settings.allow_anonymous_survey_repsonse:
-        auth = request.user.is_staff or request.user in prod.authorized_users.all()
+        auth = request.user.is_staff
         if not auth:
             messages.add_message(request,
                                  messages.ERROR,
