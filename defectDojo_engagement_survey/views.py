@@ -672,7 +672,7 @@ def answer_empty_survey(request, esid):
     engagement_survey = get_object_or_404(Engagement_Survey, id=general_survey.survey_id)
     engagement = None
     settings = System_Settings.objects.all()[0]
-    raise Exception()
+
     if not settings.allow_anonymous_survey_repsonse:
         auth = request.user.is_staff or request.user in prod.authorized_users.all()
         if not auth:
@@ -683,13 +683,11 @@ def answer_empty_survey(request, esid):
             # will render 403
             raise PermissionDenied
 
-    
     questions = [q.get_form()(prefix=str(q.id),
                               engagement_survey=engagement_survey,
                               question=q, form_tag=False)
                  for q in engagement_survey.questions.all()
                  ]
-    # survey.save()
 
     if request.method == 'POST':
         survey = Answered_Survey(survey=engagement_survey)
