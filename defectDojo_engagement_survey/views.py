@@ -685,7 +685,7 @@ def answer_empty_survey(request, esid):
 
     # survey = Answered_Survey(survey=engagement_survey)
     questions = [q
-                 for q in survey.survey.questions.all()
+                 for q in engagement_survey.questions.all()
                  ]
     # survey.save()
 
