@@ -670,7 +670,7 @@ def delete_empty_survey(request, esid):
 def answer_empty_survey(request, esid):
     general_survey = get_object_or_404(General_Survey, id=esid)
     engagement_survey = get_object_or_404(Engagement_Survey, id=general_survey.survey_id)
-    engagement = None
+    engagement, survey = None, None
     
     settings = System_Settings.objects.all()[0]
 
@@ -729,6 +729,8 @@ def answer_empty_survey(request, esid):
                                  'Survey has errors, please correct.',
                                  extra_tags='alert-danger')
     add_breadcrumb(title="Answer Empty " + engagement_survey.name + " Survey", top_level=False, request=request)
+    if survey is None:
+        survey = engagement_survey
     return render(request,
                   'defectDojo-engagement-survey/answer_survey.html',
                   {'survey': survey,
