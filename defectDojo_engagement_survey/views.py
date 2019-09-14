@@ -717,7 +717,7 @@ def answer_empty_survey(request, esid):
             survey.answered_on = date.today()
             survey.save()
             general_survey.num_responses = general_survey.num_responses + 1
-            generl_sruvey.save()
+            general_survey.save()
             messages.add_message(request,
                                  messages.SUCCESS,
                                  'Successfully answered, all answers valid.',
