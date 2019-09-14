@@ -723,7 +723,7 @@ def answer_empty_survey(request, esid):
                                  messages.ERROR,
                                  'Survey has errors, please correct.',
                                  extra_tags='alert-danger')
-    add_breadcrumb(title="Answer Empty " + survey.survey.name + " Survey", top_level=False, request=request)
+    add_breadcrumb(title="Answer Empty " + engagement_survey.name + " Survey", top_level=False, request=request)
     return render(request,
                   'defectDojo-engagement-survey/answer_survey.html',
                   {'survey': survey,
