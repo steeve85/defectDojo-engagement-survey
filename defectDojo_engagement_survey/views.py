@@ -692,7 +692,6 @@ def answer_empty_survey(request, esid):
     # survey.save()
 
     if request.method == 'POST':
-        survey = Answered_Survey(survey=engagement_survey)
         questions = [
             q.get_form()(request.POST or None,
                          prefix=str(q.id),
@@ -702,6 +701,8 @@ def answer_empty_survey(request, esid):
                     ]
 
         questions_are_valid = []
+        survey = Answered_Survey(survey=engagement_survey)
+        survey.save()
 
         for question in questions:
             valid = question.is_valid()
