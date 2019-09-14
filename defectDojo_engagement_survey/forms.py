@@ -38,8 +38,8 @@ class QuestionForm(forms.Form):
         self.answered_survey = kwargs.get('answered_survey')
         if not self.answered_survey:
             del kwargs['engagement_survey']
-
-        del kwargs['answered_survey']
+        else:
+            del kwargs['answered_survey']
 
         self.helper.form_class = kwargs.get('form_class', '')
 
