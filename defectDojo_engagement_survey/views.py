@@ -683,7 +683,7 @@ def answer_empty_survey(request, esid):
             # will render 403
             raise PermissionDenied
 
-    # survey = Answered_Survey(survey=engagement_survey)
+    
     questions = [q.get_form()(prefix=str(q.id),
                               engagement_survey=engagement_survey,
                               question=q, form_tag=False)
@@ -692,6 +692,7 @@ def answer_empty_survey(request, esid):
     # survey.save()
 
     if request.method == 'POST':
+        survey = Answered_Survey(survey=engagement_survey)
         questions = [
             q.get_form()(request.POST or None,
                          prefix=str(q.id),
