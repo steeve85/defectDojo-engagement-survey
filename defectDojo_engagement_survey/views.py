@@ -712,7 +712,7 @@ def answer_empty_survey(request, esid):
         questions_are_valid = all(questions_are_valid)
         if questions_are_valid:
             survey.completed = True
-            survey.responder = request.user
+            survey.responder = request.user if not request.user.is_anonymous else None
             survey.answered_on = date.today()
             survey.save()
             general_survey.num_responses = general_survey.num_responses + 1
