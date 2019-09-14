@@ -33,6 +33,8 @@ class QuestionForm(forms.Form):
         if 'form_tag' in kwargs:
             del kwargs['form_tag']
 
+        self.engagement_survey = kwargs('engagement_survey')
+
         self.answered_survey = kwargs.get('answered_survey')
         if not self.answered_survey:
             raise ValueError('Need an answered_survey to save answers too')
