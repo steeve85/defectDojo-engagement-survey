@@ -683,22 +683,26 @@ def answer_empty_survey(request, esid):
             # will render 403
             raise PermissionDenied
 
+    
     questions = [q.get_form()(prefix=str(q.id),
                               engagement_survey=engagement_survey,
                               question=q, form_tag=False)
                  for q in engagement_survey.questions.all()
                  ]
+    # survey.save()
 
     if request.method == 'POST':
-        questions = [q.get_form()(prefix=str(q.id),
-                              engagement_survey=engagement_survey,
-                              question=q, form_tag=False)
-                 for q in engagement_survey.questions.all()
-                 ]
-
-        questions_are_valid = []
         survey = Answered_Survey(survey=engagement_survey)
         survey.save()
+        questions = [
+            q.get_form()(request.POST or None,
+                         prefix=str(q.id),
+                         answered_survey=survey,
+                         question=q, form_tag=False)
+            for q in survey.survey.questions.all()
+                    ]
+
+        questions_are_valid = []
 
         for question in questions:
             valid = question.is_valid()
