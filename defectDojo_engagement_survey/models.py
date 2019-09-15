@@ -193,7 +193,7 @@ class ChoiceAnswer(Answer):
             return 'No Response'
 
 # Causing issues in various places.
-# auditlog.register(Answer)
-# auditlog.register(Answered_Survey)
-# auditlog.register(Question)
-# auditlog.register(Engagement_Survey)
+auditlog.register(Answer)
+auditlog.register(Answered_Survey)
+auditlog.register(Question)
+auditlog.register(Engagement_Survey)
