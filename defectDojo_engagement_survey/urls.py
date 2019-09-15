@@ -68,7 +68,7 @@ urlpatterns = [
         name='delete_empty_survey'),
     url(r'^general_survey/(?P<esid>\d+)/delete$',
         views.delete_general_survey,
-        name='delete_empty_survey'),
+        name='delete_general_survey'),
     url(r'^empty_survey/(?P<esid>\d+)/answer$',
         views.answer_empty_survey,
         name='answer_empty_survey'),
