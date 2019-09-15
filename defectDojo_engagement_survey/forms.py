@@ -234,7 +234,7 @@ class Delete_Survey_Form(forms.ModelForm):
                    'assignee')
 
 
-class Delete_General_Survey_Form(forms.ModelForm):
+class DeleteGeneralSurveyForm(forms.ModelForm):
     id = forms.IntegerField(required=True,
                             widget=forms.widgets.HiddenInput())
 
