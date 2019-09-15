@@ -662,7 +662,7 @@ def delete_empty_survey(request, esid):
 
 
 @user_passes_test(lambda u: u.is_staff)
-def delete_empty_survey(request, esid):
+def delete_general_survey(request, esid):
     engagement = None
     questions = None
     survey = get_object_or_404(General_Survey, id=esid)
