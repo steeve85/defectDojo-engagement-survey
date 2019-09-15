@@ -234,6 +234,18 @@ class Delete_Survey_Form(forms.ModelForm):
                    'assignee')
 
 
+class Delete_General_Survey_Form(forms.ModelForm):
+    id = forms.IntegerField(required=True,
+                            widget=forms.widgets.HiddenInput())
+
+    class Meta:
+        model = General_Survey
+        exclude = ('num_respsonses',
+                   'generated',
+                   'expiration',
+                   'survey')
+
+
 class Delete_Eng_Survey_Form(forms.ModelForm):
     id = forms.IntegerField(required=True,
                             widget=forms.widgets.HiddenInput())

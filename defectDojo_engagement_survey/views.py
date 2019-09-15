@@ -661,6 +661,37 @@ def delete_empty_survey(request, esid):
                    })
 
 
+@user_passes_test(lambda u: u.is_staff)
+def delete_empty_survey(request, esid):
+    engagement = None
+    questions = None
+    survey = get_object_or_404(General_Survey, id=esid)
+
+    form = Delete_General_Survey_Form(instance=survey)
+
+    if request.method == 'POST':
+        form = Delete_General_Survey_Form(request.POST, instance=survey)
+        if form.is_valid():
+            survey.delete()
+            messages.add_message(request,
+                                 messages.SUCCESS,
+                                 'Survey deleted successfully.',
+                                 extra_tags='alert-success')
+            return HttpResponseRedirect('/survey')
+        else:
+            messages.add_message(request,
+                                 messages.ERROR,
+                                 'Unable to delete survey.',
+                                 extra_tags='alert-danger')
+    add_breadcrumb(title="Delete " + survey.survey.name + " Survey", top_level=False, request=request)
+    return render(request, 'defectDojo-engagement-survey/delete_survey.html',
+                  {'survey': survey,
+                   'form': form,
+                   'engagement': engagement,
+                   'questions': questions,
+                   })
+
+
 def answer_empty_survey(request, esid):
     general_survey = get_object_or_404(General_Survey, id=esid)
     engagement_survey = get_object_or_404(Engagement_Survey, id=general_survey.survey_id)
@@ -715,7 +746,7 @@ def answer_empty_survey(request, esid):
                 message = 'Your responses have been recorded.'
             else:
                 message = 'Successfully answered, all answers valid.'
-            
+
             messages.add_message(request,
                                  messages.SUCCESS,
                                  message,
