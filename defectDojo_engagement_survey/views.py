@@ -25,7 +25,7 @@ from dojo.utils import add_breadcrumb, get_page_items
 from .forms import Add_Survey_Form, Delete_Survey_Form, CreateSurveyForm, Delete_Eng_Survey_Form, \
     EditSurveyQuestionsForm, CreateQuestionForm, CreateTextQuestionForm, AssignUserForm, \
     CreateChoiceQuestionForm, EditTextQuestionForm, EditChoiceQuestionForm, AddChoicesForm, \
-    AddEngagementForm, AddGeneralSurveyForm
+    AddEngagementForm, AddGeneralSurveyForm, DeleteGeneralSurveyForm
 from .models import Answered_Survey, Engagement_Survey, Answer, TextQuestion, ChoiceQuestion, Choice, General_Survey
 
 localtz = timezone('America/Chicago')
@@ -667,10 +667,10 @@ def delete_general_survey(request, esid):
     questions = None
     survey = get_object_or_404(General_Survey, id=esid)
 
-    form = Delete_General_Survey_Form(instance=survey)
+    form = DeleteGeneralSurveyForm(instance=survey)
 
     if request.method == 'POST':
-        form = Delete_General_Survey_Form(request.POST, instance=survey)
+        form = DeleteGeneralSurveyForm(request.POST, instance=survey)
         if form.is_valid():
             survey.delete()
             messages.add_message(request,
