@@ -20,7 +20,13 @@
                         {{ survey.assignee.username }} 
                     {% endif %}
                 </td>
-                <td>{{ survey.responder }}</td>
+                <td>
+                    {% if survey.responder %}
+                        {{ survey.responder }}
+                    {% else %}
+                        Anonymous
+                    {% endif %}
+                </td>
                 <td>
                     {% if survey.completed %}
                         <span class="pass_fail Pass">Completed</span>
