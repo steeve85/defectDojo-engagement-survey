@@ -240,7 +240,7 @@ class DeleteGeneralSurveyForm(forms.ModelForm):
 
     class Meta:
         model = General_Survey
-        exclude = ('num_respsonses',
+        exclude = ('num_responses',
                    'generated',
                    'expiration',
                    'survey')
