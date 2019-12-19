@@ -40,9 +40,6 @@
             </div>
         </div>
     </div>
-    <div class="protip">
-        <i class="fa fa-lightbulb-o"></i> <strong>ProTip!</strong> Type <kbd>e</kbd> to edit this engagement. Type <kbd>i</kbd> to import scan results or <kbd>a</kbd> to add tests.
-    </div>
 {% endblock %}
 
 {% block postscript %}
@@ -59,6 +56,5 @@
             var host = slashes.concat(window.location.host);
             modal.find('p#surveyURL').text('Survey URL: ' + host + path)
         })
-        $('#myModal').appendTo("body") 
     </script>
 {% endblock %}
