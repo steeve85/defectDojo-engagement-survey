@@ -23,7 +23,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true" onclick="showURL()" >&times;</span></button>
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="shareSurveyModalLabel">Share Survey Link</h4>
                 </div>
                 <div class="modal-body">
@@ -48,11 +48,6 @@
 {% block postscript %}
 
     <script type="application/javascript">
-        function showURL()
-        {
-            alert("Test");
-        }
-
         $('#shareSurveyModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var path = button.data('whatever') // Extract info from data-* attributes
@@ -64,5 +59,6 @@
             var host = slashes.concat(window.location.host);
             modal.find('p#surveyURL').text('Survey URL: ' + host + path)
         })
+        $('#myModal').appendTo("body") 
     </script>
 {% endblock %}
